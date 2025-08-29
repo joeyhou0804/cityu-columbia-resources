@@ -3,63 +3,81 @@
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Mail, Globe, BookOpen } from 'lucide-react';
+import { Mail, Globe, BookOpen, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
   const params = useParams();
   const locale = params.locale as string;
 
+  const content = {
+    en: {
+      linksContactTitle: 'LINKS & CONTACT',
+      disclaimerTitle: 'DISCLAIMER',
+      titleFont: 'Sofia Sans ExtraBold, sans-serif',
+      bodyFont: 'Sofia Sans Light, sans-serif',
+      officialWebsite: 'Official Program Website',
+      disclaimer: 'This website is independently built by students taking the Joint Bachelors Degree Program between City University and Columbia University. Any advice provided by this website should not be considered as a substitute for official opinions from City University of Hong Kong or Columbia University. The website can not guarantee to reflect the latest program settings or admission results. We hereby declare that one who is taking this website as a reference should pay attention.'
+    },
+    'zh-cn': {
+      linksContactTitle: '链接与联系方式',
+      disclaimerTitle: '免责声明',
+      titleFont: 'ZhiBingMei Bold, sans-serif',
+      bodyFont: 'FangZheng XiYaSong, serif',
+      officialWebsite: '官方网站',
+      disclaimer: '本网站由参加香港城市大学-哥伦比亚大学双联学位学士项目的同学自主建立。本网站所提供的建议不能代替香港城市大学或哥伦比亚大学的官方意见，也不能保证反映最新的项目设置或录取情况。希望参考本网站的相关人士注意，特此声明。'
+    },
+    'zh-hk': {
+      linksContactTitle: '連結與聯絡方式',
+      disclaimerTitle: '免責聲明',
+      titleFont: 'ChironHeiHK Bold, sans-serif',
+      bodyFont: 'ChironSungHK Regular, serif',
+      officialWebsite: '官方網站',
+      disclaimer: '本網站由參加香港城市大學-哥倫比亞大學雙聯學位學士項目的同學自主建立。本網站所提供的建議不能代替香港城市大學或哥倫比亞大學的官方意見，也不能保證反映最新的項目設置或錄取情況。希望參考本網站的相關人士注意，特此聲明。'
+    }
+  };
+
+  const currentContent = content[locale as keyof typeof content] || content.en;
+
   return (
     <footer className="relative z-20 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div className="col-span-1">
-            <div className="flex items-center mb-4">
-              <BookOpen className="h-8 w-8 text-primary-400 mr-2" />
-              <span className="text-xl font-bold">CityU Columbia Resources</span>
-            </div>
-            <p className="text-gray-300 mb-4">
-              {t('contact')}
-            </p>
-            <div className="flex items-center text-gray-300">
-              <Mail className="h-5 w-5 mr-2" />
-              <span>contact@cityucolumbia.com</span>
+        {/* First Row: Links & Contact (3/4 width) + Languages (1/4 width) */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Links & Contact - takes 3/4 width */}
+          <div className="col-span-1 md:col-span-3">
+            <h3 
+              className="text-lg font-semibold mb-4"
+              style={{ fontFamily: currentContent.titleFont }}
+            >
+              {currentContent.linksContactTitle}
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <a 
+                  href="https://cityu-hk.gs.columbia.edu/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-primary-400 transition-colors flex items-center"
+                  style={{ fontFamily: currentContent.bodyFont }}
+                >
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  {currentContent.officialWebsite}
+                </a>
+              </div>
+              <div 
+                className="flex items-center text-gray-300"
+                style={{ fontFamily: currentContent.bodyFont }}
+              >
+                <Mail className="h-5 w-5 mr-2" />
+                <span>cityucolumbiaresources@gmail.com</span>
+              </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Languages (no title) - takes 1/4 width */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`/${locale}/cityu`} className="text-gray-300 hover:text-primary-400 transition-colors">
-                  CityU Resources
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/columbia`} className="text-gray-300 hover:text-primary-400 transition-colors">
-                  Columbia Resources
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/about`} className="text-gray-300 hover:text-primary-400 transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/contact`} className="text-gray-300 hover:text-primary-400 transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Languages */}
-          <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Languages</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mt-6">
               <li>
                 <Link href="/en" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center">
                   <Globe className="h-4 w-4 mr-2" />
@@ -80,6 +98,22 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Second Row: Disclaimer - full width */}
+        <div className="border-t border-gray-800 pt-8">
+          <h3 
+            className="text-lg font-semibold mb-4"
+            style={{ fontFamily: currentContent.titleFont }}
+          >
+            {currentContent.disclaimerTitle}
+          </h3>
+          <p 
+            className="text-gray-300 text-sm leading-relaxed"
+            style={{ fontFamily: currentContent.bodyFont }}
+          >
+            {currentContent.disclaimer}
+          </p>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">

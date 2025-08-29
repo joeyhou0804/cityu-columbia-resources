@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import Hero from '@/components/Hero';
 import IntroductionSection from '@/components/IntroductionSection';
+import AdmissionPediaSection from '@/components/AdmissionPediaSection';
 
 type Props = {
   params: { locale: string };
@@ -35,17 +36,44 @@ export default function HomePage({ params: { locale } }: Props) {
       welcome: '歡迎來到"香港城市大學-哥倫比亞大學 申請資源庫"！',
       welcomeFont: 'ChironHeiHK Bold, sans-serif',
       bodyFont: 'ChironSungHK Regular, serif',
-      paragraph1: '從2019年開始，參加項目併入讀哥大的內地同學們在兩年時間裡，籌備並整理了有關報讀香港城市大學（城大）-哥倫比亞大學（哥大）雙聯學士學位項目的多項資源。其中，有報讀前的過程回憶，有每位同學珍貴的經驗分享，也有對於報讀過程中出現的常見問題分析與回答。這些資源經過編輯整合，終於以問答視頻和“報讀百科”（報考手冊）的形式，在2021年新建的網站上面世了。希望這個整合資源平台，能為對項目感興趣的同學與家長們提供參考。',
+      paragraph1: '從2019年開始，參加項目併入讀哥大的內地同學們在兩年時間裡，籌備並整理了有關報讀香港城市大學（城大）-哥倫比亞大學（哥大）雙聯學士學位項目的多項資源。其中，有報讀前的過程回憶，有每位同學珍貴的經驗分享，也有對於報讀過程中出現的常見問題分析與回答。這些資源經過編輯整合，終於以問答視頻和"報讀百科"（報考手冊）的形式，在2021年新建的網站上面世了。希望這個整合資源平台，能為對項目感興趣的同學與家長們提供參考。',
       paragraph2: '在準備手冊與視頻的過程中，2017級（2019年入讀哥大）的所有內地同學得到了城大環球事務拓展處（GEO）以及城大商學院的全力支持與幫助。在這裡，向城大、哥大的有關部門和老師致以誠摯的謝意！'
     }
   };
 
+  // Admission-Pedia section content
+  const admissionPediaContent = {
+    en: {
+      title: 'ADMISSION-PEDIA',
+      titleFont: 'Sofia Sans Black, sans-serif',
+      bodyFont: 'Sofia Sans Light, sans-serif',
+      paragraph1: 'In the first semester at Columbia, Mainland Chinese students of cohort 2017 (who entered Columbia in 2019) cooperated and composed two volumes of "Admission-Pedia (Admission Encyclopedia)". "Admission-Pedia" has the main steps of preparation before and after the application. It contains the necessary introduction and detailed explanations of the application process. Besides, there are comments and tips from students. It can serve as a reference for interested students and parents.',
+      paragraph2: 'The preparation of "Admission-Pedia" is initiated and led by Jiangtian Hou from cohort 2017 (who entered Columbia in 2019) and it is completed with help from Mainland Chinese students from the same cohort: Yijie Fang, Wenda Li, Qimeng Shi, Zhenfeng Tu, Hanyi Wang. It is published with being revised and supported by CityU College of Business. The Simplified Chinese version of "Application Encyclopedia" is also published on the official WeChat account of Chinese Students and Scholars Association of CityU (CSSAUG).'
+    },
+    'zh-cn': {
+      title: 'ADMISSION-PEDIA',
+      titleFont: 'ZhiBingMei Heavy, sans-serif',
+      bodyFont: 'FangZheng XiYaSong, serif',
+      paragraph1: 'In the first semester at Columbia, Mainland Chinese students of cohort 2017 (who entered Columbia in 2019) cooperated and composed two volumes of "Admission-Pedia (Admission Encyclopedia)". "Admission-Pedia" has the main steps of preparation before and after the application. It contains the necessary introduction and detailed explanations of the application process. Besides, there are comments and tips from students. It can serve as a reference for interested students and parents.',
+      paragraph2: 'The preparation of "Admission-Pedia" is initiated and led by Jiangtian Hou from cohort 2017 (who entered Columbia in 2019) and it is completed with help from Mainland Chinese students from the same cohort: Yijie Fang, Wenda Li, Qimeng Shi, Zhenfeng Tu, Hanyi Wang. It is published with being revised and supported by CityU College of Business. The Simplified Chinese version of "Application Encyclopedia" is also published on the official WeChat account of Chinese Students and Scholars Association of CityU (CSSAUG).'
+    },
+    'zh-hk': {
+      title: 'ADMISSION-PEDIA',
+      titleFont: 'ChironHeiHK Heavy, sans-serif',
+      bodyFont: 'ChironSungHK Regular, serif',
+      paragraph1: 'In the first semester at Columbia, Mainland Chinese students of cohort 2017 (who entered Columbia in 2019) cooperated and composed two volumes of "Admission-Pedia (Admission Encyclopedia)". "Admission-Pedia" has the main steps of preparation before and after the application. It contains the necessary introduction and detailed explanations of the application process. Besides, there are comments and tips from students. It can serve as a reference for interested students and parents.',
+      paragraph2: 'The preparation of "Admission-Pedia" is initiated and led by Jiangtian Hou from cohort 2017 (who entered Columbia in 2019) and it is completed with help from Mainland Chinese students from the same cohort: Yijie Fang, Wenda Li, Qimeng Shi, Zhenfeng Tu, Hanyi Wang. It is published with being revised and supported by CityU College of Business. The Simplified Chinese version of "Application Encyclopedia" is also published on the official WeChat account of Chinese Students and Scholars Association of CityU (CSSAUG).'
+    }
+  };
+
   const currentContent = content[locale as keyof typeof content] || content.en;
+  const currentAdmissionPediaContent = admissionPediaContent[locale as keyof typeof admissionPediaContent] || admissionPediaContent.en;
 
   return (
     <div>
       <Hero />
       <IntroductionSection currentContent={currentContent} />
+      <AdmissionPediaSection currentContent={currentAdmissionPediaContent} />
     </div>
   );
 }
