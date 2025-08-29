@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { useParams } from 'next/navigation';
 
 interface AdmissionPediaSectionProps {
   currentContent: {
@@ -17,7 +18,26 @@ interface AdmissionPediaSectionProps {
 export default function AdmissionPediaSection({ currentContent }: AdmissionPediaSectionProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageCount = 9;
+  const params = useParams();
+  const locale = params.locale as string;
+  const imageCount = 7;
+
+  // Get appropriate image prefix based on locale
+  const getImagePrefix = () => {
+    switch (locale) {
+      case 'zh-cn':
+        return 'zh_cn_';
+      case 'zh-hk':
+        return 'zh_hk_';
+      default:
+        return 'en_';
+    }
+  };
+
+  const getImagePath = (num: number) => {
+    const prefix = getImagePrefix();
+    return `/images/2019/${locale === 'zh-cn' ? 'zh-cn' : locale === 'zh-hk' ? 'zh-hk' : 'en'}/${prefix}${num}.png`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +130,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
 
               {/* Right column - Images that scroll through the viewport */}
               <div className="col-span-1 relative h-full overflow-hidden">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num, index) => {
+                {[1, 2, 3, 4, 5, 6, 7].map((num, index) => {
                   // Calculate vertical position for this image based on scroll progress
                   const imageSpacing = 65; // Space between images in vh
                   const startPosition = 100 + (index * imageSpacing); // Start below viewport
@@ -133,8 +153,8 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
                       }}
                     >
                       <img 
-                        src={`/images/en/en_${num}.png`}
-                        alt={`English resource ${num}`}
+                        src={getImagePath(num)}
+                        alt={`AdmissionPedia 2019 resource ${num}`}
                         className="w-full h-auto object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                       />
                     </div>

@@ -17,7 +17,7 @@ export default function Footer() {
       titleFont: 'Sofia Sans ExtraBold, sans-serif',
       bodyFont: 'Sofia Sans Light, sans-serif',
       officialWebsite: 'Official Program Website',
-      disclaimer: 'This website is independently built by students taking the Joint Bachelors Degree Program between City University and Columbia University. Any advice provided by this website should not be considered as a substitute for official opinions from City University of Hong Kong or Columbia University. The website can not guarantee to reflect the latest program settings or admission results. We hereby declare that one who is taking this website as a reference should pay attention.'
+      disclaimer: 'This website is independently established by students participating in the Joint Bachelors Degree Program between City University and Columbia University. The advice provided on this website does not replace the official opinions of City University of Hong Kong or Columbia University, nor does it guarantee to reflect the most updated program structure or admission status. Visitors and readers who refer to this website are kindly reminded to take note of this disclaimer.'
     },
     'zh-cn': {
       linksContactTitle: '链接与联系方式',
@@ -33,7 +33,7 @@ export default function Footer() {
       titleFont: 'ChironHeiHK Bold, sans-serif',
       bodyFont: 'ChironSungHK Regular, serif',
       officialWebsite: '官方網站',
-      disclaimer: '本網站由參加香港城市大學-哥倫比亞大學雙聯學位學士項目的同學自主建立。本網站所提供的建議不能代替香港城市大學或哥倫比亞大學的官方意見，也不能保證反映最新的項目設置或錄取情況。希望參考本網站的相關人士注意，特此聲明。'
+      disclaimer: '本網站由參加香港城市大學－哥倫比亞大學雙聯學位學士項目的同學自主建立。本網站所提供的建議不能取代香港城市大學或哥倫比亞大學的官方意見，亦不能保證反映最新的項目設置或錄取情況。希望參考本網站的相關人士注意，特此聲明。'
     }
   };
 
