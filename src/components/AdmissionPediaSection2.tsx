@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 
-interface AdmissionPediaSectionProps {
+interface AdmissionPediaSection2Props {
   currentContent: {
     title: string;
     titleFont: string;
@@ -14,7 +14,7 @@ interface AdmissionPediaSectionProps {
   };
 }
 
-export default function AdmissionPediaSection({ currentContent }: AdmissionPediaSectionProps) {
+export default function AdmissionPediaSection2({ currentContent }: AdmissionPediaSection2Props) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageCount = 9;
@@ -63,8 +63,8 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
           loop
           playsInline
         >
-          <source src="/videos/background2.mov" type="video/mp4" />
-          <source src="/videos/background2.mov" type="video/quicktime" />
+          <source src="/videos/background3.mov" type="video/mp4" />
+          <source src="/videos/background3.mov" type="video/quicktime" />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
