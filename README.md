@@ -49,7 +49,12 @@ yarn install
 pnpm install
 ```
 
-3. Run the development server:
+3. **Add video background (required):**
+   - Place your `background1.mov` file in `public/videos/`
+   - The video should be optimized for web (recommended: H.264, reasonable file size)
+   - Without this file, the hero section will show a black background
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
@@ -58,7 +63,7 @@ yarn dev
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
