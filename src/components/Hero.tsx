@@ -37,12 +37,12 @@ export default function Hero() {
     // Fade in first row immediately
     const firstTimer = setTimeout(() => {
       setShowFirstRow(true);
-    }, 300);
+    }, 100);
 
     // Fade in second row after first row
     const secondTimer = setTimeout(() => {
       setShowSecondRow(true);
-    }, 800);
+    }, 400);
 
     return () => {
       clearTimeout(firstTimer);

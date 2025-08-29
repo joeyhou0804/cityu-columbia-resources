@@ -27,6 +27,14 @@
 }
 
 @font-face {
+  font-family: 'Sofia Sans Regular';
+  src: url('/fonts/SofiaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'ZhiBingMei Bold';
   src: url('/fonts/字魂冰美式家族-Bold(商用需授权).ttf') format('truetype');
   font-weight: bold;
@@ -62,6 +70,30 @@
   font-family: 'ChironHeiHK Heavy';
   src: url('/fonts/ChironHeiHK-H.ttf') format('truetype');
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ChironHeiHK Bold';
+  src: url('/fonts/ChironHeiHK-B.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FangZheng XiYaSong';
+  src: url('/fonts/方正细雅宋简体.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ChironSungHK Regular';
+  src: url('/fonts/ChironSungHK-R.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
