@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary folders
+tmp/
+temp/
+
+# Original font source folders (keeping organized fonts in public/fonts/)
+lulo-clean/
+zhbms/
+chiron/
+Sofia_Sans/

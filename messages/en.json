@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "Home",
+    "cityu": "CityU Resources",
+    "columbia": "Columbia Resources",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "CityU & Columbia Admission Resources",
+    "subtitle": "Comprehensive resources for City University of Hong Kong and Columbia University applications",
+    "description": "Access admission guides, application materials, and video tutorials to help you succeed in your university applications."
+  },
+  "resources": {
+    "title": "Resources",
+    "downloadPdf": "Download PDF",
+    "watchVideo": "Watch Video",
+    "cityu": {
+      "title": "City University of Hong Kong",
+      "description": "Application guides and resources for CityU admission"
+    },
+    "columbia": {
+      "title": "Columbia University", 
+      "description": "Application guides and resources for Columbia University admission"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 CityU Columbia Resources. All rights reserved.",
+    "contact": "Contact us for more information."
+  }
+}

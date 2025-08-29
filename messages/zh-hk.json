@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "首頁",
+    "cityu": "香港城市大學資源",
+    "columbia": "哥倫比亞大學資源",
+    "about": "關於",
+    "contact": "聯絡我們"
+  },
+  "home": {
+    "title": "香港城市大學和哥倫比亞大學申請資源",
+    "subtitle": "香港城市大學和哥倫比亞大學申請的綜合資源",
+    "description": "獲取申請指南、申請材料和視頻教程，助您在大學申請中取得成功。"
+  },
+  "resources": {
+    "title": "資源",
+    "downloadPdf": "下載PDF",
+    "watchVideo": "觀看視頻",
+    "cityu": {
+      "title": "香港城市大學",
+      "description": "香港城市大學申請指南和資源"
+    },
+    "columbia": {
+      "title": "哥倫比亞大學",
+      "description": "哥倫比亞大學申請指南和資源"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 香港城市大學哥倫比亞大學資源庫。保留所有權利。",
+    "contact": "如需更多資訊，請聯絡我們。"
+  }
+}

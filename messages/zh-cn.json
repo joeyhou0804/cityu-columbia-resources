@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "首页",
+    "cityu": "香港城市大学资源",
+    "columbia": "哥伦比亚大学资源",
+    "about": "关于",
+    "contact": "联系我们"
+  },
+  "home": {
+    "title": "香港城市大学和哥伦比亚大学申请资源",
+    "subtitle": "香港城市大学和哥伦比亚大学申请的综合资源",
+    "description": "获取申请指南、申请材料和视频教程，助您在大学申请中取得成功。"
+  },
+  "resources": {
+    "title": "资源",
+    "downloadPdf": "下载PDF",
+    "watchVideo": "观看视频",
+    "cityu": {
+      "title": "香港城市大学",
+      "description": "香港城市大学申请指南和资源"
+    },
+    "columbia": {
+      "title": "哥伦比亚大学",
+      "description": "哥伦比亚大学申请指南和资源"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 香港城市大学哥伦比亚大学资源库。保留所有权利。",
+    "contact": "如需更多信息，请联系我们。"
+  }
+}

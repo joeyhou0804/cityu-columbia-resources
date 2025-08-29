@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Sofia Sans ExtraBold';
+  src: url('/fonts/SofiaSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZhiBingMei Bold';
+  src: url('/fonts/字魂冰美式家族-Bold(商用需授权).ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ChironHeiHK Heavy';
+  src: url('/fonts/ChironHeiHK-H.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-gray-900 bg-white;
+  }
+}
+
+@layer components {
+  .logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.1;
+    text-align: left;
+  }
+  
+  .logo-text-en {
+    font-family: 'Sofia Sans ExtraBold', sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  
+  .logo-text-zh-cn {
+    font-family: 'ZhiBingMei Bold', 'Microsoft YaHei', sans-serif;
+    font-size: 16px;
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-text-zh-hk {
+    font-family: 'ChironHeiHK Heavy', 'Microsoft JhengHei', sans-serif;
+    font-size: 16px;
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-line-1 {
+    color: #BB3568;
+  }
+  
+  .logo-line-2 {
+    color: #62A8E5;
+  }
+  
+  .logo-line-3 {
+    color: #A0A09F;
+  }
+}
