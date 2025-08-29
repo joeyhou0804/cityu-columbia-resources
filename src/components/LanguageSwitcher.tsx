@@ -11,7 +11,11 @@ const languages = [
   { code: 'zh-hk', name: '繁體中文' },
 ];
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  isTransparent?: boolean;
+}
+
+export default function LanguageSwitcher({ isTransparent = false }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const params = useParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +45,11 @@ export default function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+        className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors ${
+          isTransparent 
+            ? 'text-white hover:text-gray-200' 
+            : 'text-gray-700 hover:text-primary-600'
+        }`}
       >
         <Globe size={16} />
         <span>{currentLanguage?.name}</span>
