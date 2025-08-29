@@ -11,9 +11,49 @@
 }
 
 @font-face {
+  font-family: 'Sofia Sans Light';
+  src: url('/fonts/SofiaSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Black';
+  src: url('/fonts/SofiaSans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'ZhiBingMei Bold';
   src: url('/fonts/字魂冰美式家族-Bold(商用需授权).ttf') format('truetype');
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZhiBingMei Medium';
+  src: url('/fonts/字魂冰美式家族-Medium(商用需授权).ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZhiBingMei Heavy';
+  src: url('/fonts/字魂冰美式家族-Heavy(商用需授权).ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ChironHeiHK Medium';
+  src: url('/fonts/ChironHeiHK-M.ttf') format('truetype');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }

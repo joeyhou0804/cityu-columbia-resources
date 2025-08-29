@@ -1,15 +1,54 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import { ArrowRight, BookOpen, Video } from 'lucide-react';
 
 export default function Hero() {
-  const t = useTranslations('home');
+  const [showFirstRow, setShowFirstRow] = useState(false);
+  const [showSecondRow, setShowSecondRow] = useState(false);
   const params = useParams();
   const locale = params.locale as string;
 
+  // Content and font configuration for each language
+  const content = {
+    en: {
+      firstRow: 'THE ROAD TO',
+      secondRow: 'SUCCESS',
+      firstRowFont: 'Sofia Sans Light, sans-serif',
+      secondRowFont: 'Sofia Sans Black, sans-serif'
+    },
+    'zh-cn': {
+      firstRow: '通往',
+      secondRow: '成功之路',
+      firstRowFont: 'ZhiBingMei Medium, sans-serif',
+      secondRowFont: 'ZhiBingMei Heavy, sans-serif'
+    },
+    'zh-hk': {
+      firstRow: '通往',
+      secondRow: '成功之路',
+      firstRowFont: 'ChironHeiHK Medium, sans-serif',
+      secondRowFont: 'ChironHeiHK Heavy, sans-serif'
+    }
+  };
+
+  const currentContent = content[locale as keyof typeof content] || content.en;
+
+  useEffect(() => {
+    // Fade in first row immediately
+    const firstTimer = setTimeout(() => {
+      setShowFirstRow(true);
+    }, 300);
+
+    // Fade in second row after first row
+    const secondTimer = setTimeout(() => {
+      setShowSecondRow(true);
+    }, 800);
+
+    return () => {
+      clearTimeout(firstTimer);
+      clearTimeout(secondTimer);
+    };
+  }, []);
   return (
     <>
       {/* Fixed Video Background */}
@@ -23,42 +62,23 @@ export default function Hero() {
         >
           <source src="/videos/background1.mov" type="video/mp4" />
           <source src="/videos/background1.mov" type="video/quicktime" />
-          {/* Fallback for browsers that don't support video */}
         </video>
-        
       </div>
 
       {/* Hero Content */}
-      <section className="relative h-screen flex items-center justify-center z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            {t('title')}
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md">
-            {t('subtitle')}
-          </p>
-          <p className="text-lg mb-12 max-w-3xl mx-auto drop-shadow-md">
-            {t('description')}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={`/${locale}/cityu`}
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-primary-600 bg-white rounded-lg hover:bg-gray-50 transition-colors shadow-lg backdrop-blur-sm"
-            >
-              <BookOpen className="mr-2" size={20} />
-              CityU Resources
-              <ArrowRight className="ml-2" size={20} />
-            </Link>
-            
-            <Link
-              href={`/${locale}/columbia`}
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-primary-500 bg-opacity-90 border-2 border-white rounded-lg hover:bg-primary-400 transition-colors shadow-lg backdrop-blur-sm"
-            >
-              <Video className="mr-2" size={20} />
-              Columbia Resources
-              <ArrowRight className="ml-2" size={20} />
-            </Link>
+      <section className="relative h-screen z-10">
+        <div className="absolute w-full text-center text-white" style={{ top: '5%' }}>
+          <div 
+            className={`text-xl font-bold transition-opacity duration-1000 ${showFirstRow ? 'opacity-100' : 'opacity-0'}`} 
+            style={{ fontSize: '20px', lineHeight: '1', fontFamily: currentContent.firstRowFont }}
+          >
+            {currentContent.firstRow}
+          </div>
+          <div 
+            className={`font-bold transition-opacity duration-1000 ${showSecondRow ? 'opacity-100' : 'opacity-0'}`}
+            style={{ fontSize: '120px', lineHeight: '1', fontFamily: currentContent.secondRowFont }}
+          >
+            {currentContent.secondRow}
           </div>
         </div>
       </section>
