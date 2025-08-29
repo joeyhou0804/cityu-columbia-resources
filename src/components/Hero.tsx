@@ -26,8 +26,6 @@ export default function Hero() {
           {/* Fallback for browsers that don't support video */}
         </video>
         
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
 
       {/* Hero Content */}
