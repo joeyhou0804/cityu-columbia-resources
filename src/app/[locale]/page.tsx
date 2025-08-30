@@ -207,8 +207,81 @@ export default function HomePage({ params: { locale } }: Props) {
   const currentVideoContent = videoContent[locale as keyof typeof videoContent] || videoContent.en;
   const currentVideoClipContent = videoClipContent[locale as keyof typeof videoClipContent] || videoClipContent.en;
 
+  // Localized structured data content
+  const structuredDataContent = {
+    en: {
+      name: "CityU Columbia Resources",
+      description: "Free admission guides, application materials, and video tutorials for the Joint Bachelors Program between City University of Hong Kong and Columbia University",
+      courseName: "CityU Columbia Joint Bachelors Program Application Guide",
+      courseDescription: "Comprehensive application guide for the CityU Columbia Joint Bachelors Program",
+      videoName: "Application Process Q&A Videos",
+      videoDescription: "Video tutorials answering common questions about the application process"
+    },
+    'zh-cn': {
+      name: "城大-哥大资源库",
+      description: "香港城市大学与哥伦比亚大学双联学士学位项目的免费报读手册、申请资料和视频分享",
+      courseName: "城大-哥大双联学士学位项目报读手册",
+      courseDescription: "城大-哥大双联学士学位项目的综合报读手册",
+      videoName: "申请流程问答视频",
+      videoDescription: "回答申请过程中常见问题的视频教程"
+    },
+    'zh-hk': {
+      name: "城大-哥大資源庫",
+      description: "香港城市大學與哥倫比亞大學雙聯學士學位項目的免費報讀手冊、申請資料和影片分享",
+      courseName: "城大-哥大雙聯學士學位項目報讀手冊",
+      courseDescription: "城大-哥大雙聯學士學位項目的綜合報讀手冊",
+      videoName: "申請流程問答影片",
+      videoDescription: "回答申請過程中常見問題的影片教程"
+    }
+  };
+
+  const structuredContent = structuredDataContent[locale as keyof typeof structuredDataContent] || structuredDataContent.en;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": structuredContent.name,
+    "url": `https://www.cityucolumbia.com/${locale}`,
+    "description": structuredContent.description,
+    "sameAs": [
+      "https://www.cityucolumbia.com"
+    ],
+    "serviceType": "Educational Resources",
+    "areaServed": "International",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Educational Resources",
+      "itemListElement": [
+        {
+          "@type": "Course",
+          "name": structuredContent.courseName,
+          "description": structuredContent.courseDescription,
+          "provider": {
+            "@type": "Organization",
+            "name": "CityU Columbia Students"
+          }
+        },
+        {
+          "@type": "VideoObject",
+          "name": structuredContent.videoName,
+          "description": structuredContent.videoDescription,
+          "provider": {
+            "@type": "Organization",
+            "name": "CityU Columbia Students"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       <Hero />
       <IntroductionSection currentContent={currentContent} />
       <AdmissionPediaSection currentContent={currentAdmissionPediaContent} />
