@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Mail, Globe, BookOpen, ExternalLink } from 'lucide-react';
+import { Mail, Globe, BookOpen, ExternalLink, Linkedin, Youtube, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -119,13 +119,55 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p 
-            className="text-gray-400"
-            style={{ fontFamily: currentContent.titleFont }}
-          >
-            {currentContent.copyright}
-          </p>
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p 
+              className="text-gray-400 text-center sm:text-left"
+              style={{ fontFamily: currentContent.titleFont }}
+            >
+              {currentContent.copyright}
+            </p>
+            
+            {/* Social Media Icons */}
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/in/joey1m/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCYglU1CCVqkBqkHBYNGDbzw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/JoeyHouKun"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/joeyhou0804"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
