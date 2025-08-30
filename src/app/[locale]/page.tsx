@@ -4,6 +4,7 @@ import IntroductionSection from '@/components/IntroductionSection';
 import AdmissionPediaSection from '@/components/AdmissionPediaSection';
 import AdmissionPediaSection2 from '@/components/AdmissionPediaSection2';
 import VideoSection from '@/components/VideoSection';
+import VideoClipSection from '@/components/VideoClipSection';
 
 type Props = {
   params: { locale: string };
@@ -178,10 +179,33 @@ export default function HomePage({ params: { locale } }: Props) {
     }
   };
 
+  // Video clip section content
+  const videoClipContent = {
+    en: {
+      title: 'VIDEO CLIPS',
+      titleFont: 'Sofia Sans Black, sans-serif',
+      subtitle: 'Check out these video clips, too!',
+      subtitleFont: 'Sofia Sans ExtraBold, sans-serif'
+    },
+    'zh-cn': {
+      title: '专题短片',
+      titleFont: 'ZhiBingMei Heavy, sans-serif',
+      subtitle: '也请关注这里的专题短片吧！',
+      subtitleFont: 'ZhiBingMei Bold, sans-serif'
+    },
+    'zh-hk': {
+      title: '專題短片',
+      titleFont: 'ChironHeiHK Heavy, sans-serif',
+      subtitle: '也請關注這裡的專題短片吧！',
+      subtitleFont: 'ChironHeiHK Bold, sans-serif'
+    }
+  };
+
   const currentContent = content[locale as keyof typeof content] || content.en;
   const currentAdmissionPediaContent = admissionPediaContent[locale as keyof typeof admissionPediaContent] || admissionPediaContent.en;
   const currentAdmissionPediaContent2025 = admissionPediaContent2025[locale as keyof typeof admissionPediaContent2025] || admissionPediaContent2025.en;
   const currentVideoContent = videoContent[locale as keyof typeof videoContent] || videoContent.en;
+  const currentVideoClipContent = videoClipContent[locale as keyof typeof videoClipContent] || videoClipContent.en;
 
   return (
     <div>
@@ -190,6 +214,7 @@ export default function HomePage({ params: { locale } }: Props) {
       <AdmissionPediaSection currentContent={currentAdmissionPediaContent} />
       <AdmissionPediaSection2 currentContent={currentAdmissionPediaContent2025} />
       <VideoSection currentContent={currentVideoContent} />
+      <VideoClipSection currentContent={currentVideoClipContent} />
     </div>
   );
 }
