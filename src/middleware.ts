@@ -9,10 +9,7 @@ export default createMiddleware({
   defaultLocale: 'en',
   
   // Always use prefix for cleaner URLs
-  localePrefix: 'always',
-  
-  // Disable automatic locale detection
-  localeDetection: false
+  localePrefix: 'always'
 });
 
 export const config = {
