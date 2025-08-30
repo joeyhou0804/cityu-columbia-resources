@@ -60,8 +60,7 @@ export default function Hero() {
           loop
           playsInline
         >
-          <source src="/videos/background1.mov" type="video/mp4" />
-          <source src="/videos/background1.mov" type="video/quicktime" />
+          <source src="/videos/background1.mp4" type="video/mp4" />
         </video>
       </div>
 

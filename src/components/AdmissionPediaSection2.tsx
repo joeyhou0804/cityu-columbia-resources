@@ -52,7 +52,7 @@ const BUTTONS_BY_LOCALE: Record<
     cityu: {
       show: false,
       enabled: false,
-      href: '/pdfs/2025/volume_cityu.pdf',
+      href: '/pdfs/2025/en/volume_cityu.pdf',
       label: 'Volume of CityU',
       topTooltipEnabled: false,
       topTooltipLabel: DEFAULT_TOP_TOOLTIP.en,
@@ -62,7 +62,7 @@ const BUTTONS_BY_LOCALE: Record<
     columbia: {
       show: true,
       enabled: false,
-      href: '/pdfs/2025/volume_columbia.pdf',
+      href: '/pdfs/2025/en/volume_columbia.pdf',
       label: 'Volume of Columbia',
       topTooltipEnabled: false,
       topTooltipLabel: DEFAULT_TOP_TOOLTIP.en,
@@ -197,8 +197,7 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
           loop
           playsInline
         >
-          <source src="/videos/background3.mov" type="video/mp4" />
-          <source src="/videos/background3.mov" type="video/quicktime" />
+          <source src="/videos/background3.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
