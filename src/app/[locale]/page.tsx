@@ -44,12 +44,12 @@ export default function HomePage({ params: { locale } }: Props) {
     }
   };
 
-  // Admission-Pedia section content (2019 version)
+  // Admission-Pedia section content (2019 edition)
   const admissionPediaContent = {
     en: {
       title: 'ADMISSION-PEDIA',
       titleFont: 'Sofia Sans Black, sans-serif',
-      section: 'Year 2019 Version',
+      section: 'Year 2019 Edition',
       sectionFont: 'Sofia Sans ExtraBold, sans-serif',
       bodyFont: 'Sofia Sans Light, sans-serif',
       paragraph1: 'In the first semester at Columbia, Mainland Chinese students of cohort 2017 (who entered Columbia in 2019) cooperated and composed two volumes of "Admission-Pedia (Admission Encyclopedia)". "Admission-Pedia" has the main steps of preparation before and after the application. It contains the necessary introduction and detailed explanations of the application process. Besides, there are comments and tips from students. It can serve as a reference for interested students and parents.',
@@ -75,12 +75,12 @@ export default function HomePage({ params: { locale } }: Props) {
     }
   };
 
-  // Admission-Pedia section content (2025 version)
+  // Admission-Pedia section content (2025 edition)
   const admissionPediaContent2025 = {
     en: {
       title: 'ADMISSION-PEDIA',
       titleFont: 'Sofia Sans Black, sans-serif',
-      section: 'Year 2025 Version',
+      section: 'Year 2025 Edition',
       sectionFont: 'Sofia Sans ExtraBold, sans-serif',
       bodyFont: 'Sofia Sans Light, sans-serif',
       paragraph1: 'Since 2025, Lezhi Ma (Class of 2022) has made significant efforts in coordinating and organizing the revisions of the handbook and provided important suggestions and feedback on its content. Several editors from the Class of 2022 and Class of 2023 of this program updated the content of the handbook and contributed valuable suggestions for the 2025 edition.',

@@ -16,24 +16,27 @@ export default function Footer() {
       disclaimerTitle: 'DISCLAIMER',
       titleFont: 'Sofia Sans ExtraBold, sans-serif',
       bodyFont: 'Sofia Sans Light, sans-serif',
-      officialWebsite: 'Official Program Website',
-      disclaimer: 'This website is independently established by students participating in the Joint Bachelors Degree Program between City University and Columbia University. The advice provided on this website does not replace the official opinions of City University of Hong Kong or Columbia University, nor does it guarantee to reflect the most updated program structure or admission status. Visitors and readers who refer to this website are kindly reminded to take note of this disclaimer.'
+      officialWebsite: 'Official Website of the Joint Bachelors Degree Program between CityU and Columbia',
+      disclaimer: 'This website is independently established by students participating in the Joint Bachelors Degree Program between City University and Columbia University. The advice provided on this website does not replace the official opinions of City University of Hong Kong or Columbia University, nor does it guarantee to reflect the most updated program structure or admission status. Visitors and readers who refer to this website are kindly reminded to take note of this disclaimer.',
+      copyright: 'Joey Hou | Made in 2021 | Updated in 2025',
     },
     'zh-cn': {
       linksContactTitle: '链接与联系方式',
       disclaimerTitle: '免责声明',
       titleFont: 'ZhiBingMei Bold, sans-serif',
       bodyFont: 'FangZheng XiYaSong, serif',
-      officialWebsite: '官方网站',
-      disclaimer: '本网站由参加香港城市大学-哥伦比亚大学双联学位学士项目的同学自主建立。本网站所提供的建议不能代替香港城市大学或哥伦比亚大学的官方意见，也不能保证反映最新的项目设置或录取情况。希望参考本网站的相关人士注意，特此声明。'
+      officialWebsite: '城大-哥大双联学士学位项目官方网站',
+      disclaimer: '本网站由参加香港城市大学-哥伦比亚大学双联学位学士项目的同学自主建立。本网站所提供的建议不能代替香港城市大学或哥伦比亚大学的官方意见，也不能保证反映最新的项目设置或录取情况。希望参考本网站的相关人士注意，特此声明。',
+      copyright: '侯江天 | 2021年制作 | 2025年更新',
     },
     'zh-hk': {
       linksContactTitle: '連結與聯絡方式',
       disclaimerTitle: '免責聲明',
       titleFont: 'ChironHeiHK Bold, sans-serif',
       bodyFont: 'ChironSungHK Regular, serif',
-      officialWebsite: '官方網站',
-      disclaimer: '本網站由參加香港城市大學－哥倫比亞大學雙聯學位學士項目的同學自主建立。本網站所提供的建議不能取代香港城市大學或哥倫比亞大學的官方意見，亦不能保證反映最新的項目設置或錄取情況。希望參考本網站的相關人士注意，特此聲明。'
+      officialWebsite: '城大－哥大雙聯學士學位項目官方網站',
+      disclaimer: '本網站由參加香港城市大學－哥倫比亞大學雙聯學位學士項目的同學自主建立。本網站所提供的建議不能取代香港城市大學或哥倫比亞大學的官方意見，亦不能保證反映最新的項目設置或錄取情況。希望參考本網站的相關人士注意，特此聲明。',
+      copyright: '侯江天 | 2021年製作 | 2025年更新',
     }
   };
 
@@ -117,8 +120,11 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
-            {t('copyright')}
+          <p 
+            className="text-gray-400"
+            style={{ fontFamily: currentContent.titleFont }}
+          >
+            {currentContent.copyright}
           </p>
         </div>
       </div>
