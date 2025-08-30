@@ -105,7 +105,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
   }, [video1Revealed, video2Revealed]);
 
   return (
-    <section className="relative z-20" style={{ backgroundColor: '#003865' }}>
+    <section className="relative z-20 overflow-x-hidden" style={{ backgroundColor: '#003865' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Grid (lg+):
             Row 1: page header + Video 1 header (left)
