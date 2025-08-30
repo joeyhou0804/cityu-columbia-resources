@@ -19,6 +19,11 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
     keywords: ['CityU', 'Columbia', 'University', 'Admission', 'Resources', '香港城市大学', '哥伦比亚大学'],
     authors: [{ name: 'CityU Columbia Resources' }],
     creator: 'CityU Columbia Resources',
+    icons: {
+      icon: '/favicon.png',
+      shortcut: '/favicon.png',
+      apple: '/favicon.png',
+    },
     openGraph: {
       type: 'website',
       locale: locale,
