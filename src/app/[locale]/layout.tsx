@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -38,6 +39,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 export default function LocaleLayout({ children, params: { locale } }: Props) {
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as any)) notFound();
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   return (
     <div className="min-h-screen flex flex-col">
