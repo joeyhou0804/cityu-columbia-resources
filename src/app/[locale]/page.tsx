@@ -121,38 +121,59 @@ export default function HomePage({ params: { locale } }: Props) {
         "(3) How is the learning experience with military veterans in the School of General Studies?",
         "(4) What do you like and dislike the most about Columbia?",
         "(5) How much money are we going to pay every month on average?"
+      ],
+      videoTitle2: "Joey's Question & Answer [Episode 2]",
+      videoSubtitle2: "Columbia & CityU HK JBDP Pre-departure Orientation Session 2021",
+      questions2: [
+        "(1) Can you show me around the campus?",
+        "(2) How can we deal with pressure at Columbia?",
+        "(3) What should I do if my Columbia peers are better that me?"
       ]
     },
     'zh-cn': {
-      title: '视频',
+      title: '问答视频',
       titleFont: 'ZhiBingMei Heavy, sans-serif',
       sectionFont: 'ZhiBingMei Bold, sans-serif',
       bodyFont: 'FangZheng XiYaSong, serif',
-      paragraph1: '每年四月，城大为新录取的城大-哥大双联学士学位项目学生举办出国前预备培训会。2017级（2019年入读哥大）侯江天同学为培训会策划并制作了两集视频。这些视频包含了新录取学生的多个常见问题，以及哥伦比亚大学和纽约市的多个街景和生活场景。',
-      videoTitle: "Joey问答 [第1集]",
-      videoSubtitle: "城大-哥大双联学士学位项目 2020年出国前预备培训会",
+      paragraph1: '城大在每年四月，为新录取的同学举行哥大-城大双联学士学位项目的行前活动说明会。2017级（2019年入读哥大）侯江天同学在2020年、2021年策划并拍摄了两集视频，其中集合了多个新录取同学经常提及的问题。视频中也包括了很多在纽约和哥大的街景以及生活场景。',
+      videoTitle: "小猴同学之哥大双学位项目问与答 [第一集]",
+      videoSubtitle: "哥大-城大双联学士学位项目行前活动说明会 2020",
       questions: [
-        "(1) 我们需要多少年完成学业？",
-        "(2) 核心课程与城大通识课程有何不同？",
-        "(3) 在通识学院与退伍军人一起学习的体验如何？",
-        "(4) 你最喜欢和最不喜欢哥大的什么？",
-        "(5) 我们平均每月需要支付多少钱？"
+        "（1）我们在哥大需要多久才能毕业？",
+        "（2）哥大的核心课程（Core）与城大的通识教育课程（GE）有什么不同？",
+        "（3）在通识教育学院和来自军队的老兵们上课是怎样一种体验？",
+        "（4）你自己对哥大最喜欢/讨厌的是什么？",
+        "（5）每个月平均消费是多少？"
+      ],
+      videoTitle2: "小猴同学之哥大双学位项目问与答 [第二集]",
+      videoSubtitle2: "哥大-城大双联学士学位项目行前活动说明会 2021",
+      questions2: [
+        "（1）能带我们转转校园吗？",
+        "（2）该怎么样在哥大面对压力呢？",
+        "（3）如果我的哥大同学比我优秀该怎么办？"
       ]
     },
     'zh-hk': {
-      title: '影片',
+      title: '問答影片',
       titleFont: 'ChironHeiHK Heavy, sans-serif',
       sectionFont: 'ChironHeiHK Bold, sans-serif',
       bodyFont: 'ChironSungHK Regular, serif',
-      paragraph1: '每年四月，城大為新錄取的城大－哥大雙聯學士學位項目學生舉辦出國前預備培訓會。2017級（2019年入讀哥大）侯江天同學為培訓會策劃並製作了兩集影片。這些影片包含了新錄取學生的多個常見問題，以及哥倫比亞大學和紐約市的多個街景和生活場景。',
-      videoTitle: "Joey問答 [第1集]",
-      videoSubtitle: "城大－哥大雙聯學士學位項目 2020年出國前預備培訓會",
+      paragraph1: '城大每年四月都會為新錄取的同學舉行哥大－城大雙聯學士學位項目的行前說明會。2017級（2019年入讀哥大）的侯江天同學於2020年及2021年策劃並拍攝了兩集影片，內容集合了多個新錄取同學經常提出的問題。影片中亦包括許多在紐約及哥大的街景與生活場景。',
+      videoTitle: "小猴同學之哥大雙學位項目問與答［第一集］",
+      videoSubtitle: "哥大－城大雙聯學士學位項目行前說明會 2020",
       questions: [
-        "(1) 我們需要多少年完成學業？",
-        "(2) 核心課程與城大通識課程有何不同？",
-        "(3) 在通識學院與退伍軍人一起學習的體驗如何？",
-        "(4) 你最喜歡和最不喜歡哥大的什麼？",
-        "(5) 我們平均每月需要支付多少錢？"
+        "（1）我們在哥大需要多久才能畢業？",
+        "（2）哥大的核心課程（Core）與城大的通識教育課程（GE）有甚麼不同？",
+        "（3）在通識教育學院與來自軍隊的退伍軍人一同上課是怎樣的體驗？",
+        "（4）你自己最喜歡／最討厭哥大的甚麼？",
+        "（5）每個月的平均開支是多少？"
+      ],
+      videoTitle2: "小猴同學之哥大雙學位項目問與答［第二集］",
+      videoSubtitle2: "哥大－城大雙聯學士學位項目行前說明會 2021",
+      questions2: [
+        "（1）能帶我們參觀一下校園嗎？",
+        "（2）在哥大應該如何面對壓力呢？",
+        "（3）如果我的哥大同學比我優秀該怎麼辦？"
       ]
     }
   };
