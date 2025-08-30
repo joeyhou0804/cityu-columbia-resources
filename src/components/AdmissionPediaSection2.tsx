@@ -20,7 +20,16 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
   const sectionRef = useRef<HTMLDivElement>(null);
   const params = useParams();
   const locale = params.locale as string;
-  const imageCount = 5; // 2025 version has 5 images
+
+  // ---- Configurable constants ----
+  const imageCount = 5;            // 2025 version has 5 images
+  const IMAGE_SPACING_VH = 65;     // vertical spacing between images
+  const LAST_IMAGE_STOP_VH = 10;   // last image should stop 10vh above bottom
+
+  // Precompute distances: make sticky end exactly when the last image reaches 10vh
+  const lastIndex = imageCount - 1;
+  const scrollDistance = LAST_IMAGE_STOP_VH + lastIndex * IMAGE_SPACING_VH; // total travel for images
+  const sectionHeightVh = scrollDistance; // match section height to travel -> no dead zone
 
   // Get appropriate image prefix based on locale
   const getImagePrefix = () => {
@@ -42,17 +51,16 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
-      
+
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
-      // Calculate scroll progress based on section position
+
+      // Progress through the sticky span: 0 -> 1
       if (rect.top <= 0 && rect.bottom >= windowHeight) {
-        // Section is in view and potentially sticky
         const sectionHeight = rect.height;
         const visibleFromTop = Math.abs(rect.top);
-        const progress = Math.min(visibleFromTop / (sectionHeight - windowHeight), 1);
-        setScrollProgress(progress);
+        const raw = visibleFromTop / (sectionHeight - windowHeight);
+        setScrollProgress(Math.min(Math.max(raw, 0), 1));
       } else if (rect.top > 0) {
         setScrollProgress(0);
       } else {
@@ -61,18 +69,19 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative z-20"
-      style={{ height: `${imageCount * 100}vh` }}
+      style={{ height: `${sectionHeightVh}vh` }}
     >
       {/* Fixed Video Background */}
       <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
@@ -88,38 +97,38 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-        
+
         {/* Content overlay */}
         <div className="absolute inset-0 z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 h-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-0 h-full">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
               {/* Left column - Text content */}
               <div className="col-span-2 space-y-6 flex flex-col justify-center">
-                <h2 
+                <h2
                   className="text-white font-bold"
-                  style={{ 
+                  style={{
                     fontFamily: currentContent.titleFont,
-                    fontSize: '60px'
+                    fontSize: '60px',
                   }}
                 >
                   {currentContent.title}
                 </h2>
-                
+
                 <div className="space-y-6 mt-12">
-                  <p 
+                  <p
                     className="text-white text-lg leading-relaxed"
                     style={{ fontFamily: currentContent.sectionFont }}
                   >
                     {currentContent.section}
                   </p>
-                  <p 
+                  <p
                     className="text-white text-lg leading-relaxed"
                     style={{ fontFamily: currentContent.bodyFont }}
                   >
                     {currentContent.paragraph1}
                   </p>
-                  
-                  <p 
+
+                  <p
                     className="text-white text-lg leading-relaxed"
                     style={{ fontFamily: currentContent.bodyFont }}
                   >
@@ -130,29 +139,26 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
 
               {/* Right column - Images that scroll through the viewport */}
               <div className="col-span-1 relative h-full overflow-hidden">
-                {[1, 2, 3, 4, 5].map((num, index) => {
-                  // Calculate vertical position for this image based on scroll progress
-                  const imageSpacing = 65; // Space between images in vh
-                  const startPosition = 100 + (index * imageSpacing); // Start below viewport
-                  
-                  // Let images scroll naturally through and off the screen
-                  const scrollDistance = imageCount * imageSpacing + 100; // Total scroll distance
-                  const currentPosition = startPosition - (scrollProgress * scrollDistance);
-                  
-                  // Show image only when it's reasonably close to the viewport
-                  const isVisible = currentPosition > -80 && currentPosition < 120;
-                  
+                {Array.from({ length: imageCount }, (_, i) => i + 1).map((num, index) => {
+                  // Start at top-of-list: image 1 visible first.
+                  // Each image begins below the viewport (negative bottom), then moves up with progress.
+                  const currentBottom =
+                    (-index * IMAGE_SPACING_VH) + (scrollProgress * scrollDistance);
+
+                  // Only fade in when near the viewport
+                  const isVisible = currentBottom > -80 && currentBottom < 120;
+
                   return (
                     <div
                       key={num}
                       className="absolute w-full px-4"
                       style={{
-                        top: `${currentPosition}vh`,
+                        bottom: `${currentBottom}vh`,
                         opacity: isVisible ? 1 : 0,
-                        transition: 'opacity 0.2s ease-out'
+                        transition: 'opacity 0.2s ease-out',
                       }}
                     >
-                      <img 
+                      <img
                         src={getImagePath(num)}
                         alt={`AdmissionPedia 2025 resource ${num}`}
                         className="w-full h-auto object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
