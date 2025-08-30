@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import IntroductionSection from '@/components/IntroductionSection';
 import AdmissionPediaSection from '@/components/AdmissionPediaSection';
 import AdmissionPediaSection2 from '@/components/AdmissionPediaSection2';
+import VideoSection from '@/components/VideoSection';
 
 type Props = {
   params: { locale: string };
@@ -104,9 +105,62 @@ export default function HomePage({ params: { locale } }: Props) {
     }
   };
 
+  // Video section content
+  const videoContent = {
+    en: {
+      title: 'VIDEO',
+      titleFont: 'Sofia Sans Black, sans-serif',
+      sectionFont: 'Sofia Sans ExtraBold, sans-serif',
+      bodyFont: 'Sofia Sans Light, sans-serif',
+      paragraph1: 'Every April, CityU holds a pre-departure orientation session for new-admitted students of the CityU-Columbia Joint Bachelors Degree Program. Jiangtian Hou from cohort 2017 (who entered Columbia in 2019) has planned and directed two episodes of videos for the session. These videos include several commonly asked questions from new-admitted students along with multiple streetviews and life settings of Columbia and New York City.',
+      videoTitle: "Joey's Question & Answer [Episode 1]",
+      videoSubtitle: "Columbia & CityU HK JBDP Pre-departure Orientation Session 2020",
+      questions: [
+        "(1) How many years do we need to complete our studies?",
+        "(2) How are the courses in the core curriculum different from the GE courses at CityU?",
+        "(3) How is the learning experience with military veterans in the School of General Studies?",
+        "(4) What do you like and dislike the most about Columbia?",
+        "(5) How much money are we going to pay every month on average?"
+      ]
+    },
+    'zh-cn': {
+      title: '视频',
+      titleFont: 'ZhiBingMei Heavy, sans-serif',
+      sectionFont: 'ZhiBingMei Bold, sans-serif',
+      bodyFont: 'FangZheng XiYaSong, serif',
+      paragraph1: '每年四月，城大为新录取的城大-哥大双联学士学位项目学生举办出国前预备培训会。2017级（2019年入读哥大）侯江天同学为培训会策划并制作了两集视频。这些视频包含了新录取学生的多个常见问题，以及哥伦比亚大学和纽约市的多个街景和生活场景。',
+      videoTitle: "Joey问答 [第1集]",
+      videoSubtitle: "城大-哥大双联学士学位项目 2020年出国前预备培训会",
+      questions: [
+        "(1) 我们需要多少年完成学业？",
+        "(2) 核心课程与城大通识课程有何不同？",
+        "(3) 在通识学院与退伍军人一起学习的体验如何？",
+        "(4) 你最喜欢和最不喜欢哥大的什么？",
+        "(5) 我们平均每月需要支付多少钱？"
+      ]
+    },
+    'zh-hk': {
+      title: '影片',
+      titleFont: 'ChironHeiHK Heavy, sans-serif',
+      sectionFont: 'ChironHeiHK Bold, sans-serif',
+      bodyFont: 'ChironSungHK Regular, serif',
+      paragraph1: '每年四月，城大為新錄取的城大－哥大雙聯學士學位項目學生舉辦出國前預備培訓會。2017級（2019年入讀哥大）侯江天同學為培訓會策劃並製作了兩集影片。這些影片包含了新錄取學生的多個常見問題，以及哥倫比亞大學和紐約市的多個街景和生活場景。',
+      videoTitle: "Joey問答 [第1集]",
+      videoSubtitle: "城大－哥大雙聯學士學位項目 2020年出國前預備培訓會",
+      questions: [
+        "(1) 我們需要多少年完成學業？",
+        "(2) 核心課程與城大通識課程有何不同？",
+        "(3) 在通識學院與退伍軍人一起學習的體驗如何？",
+        "(4) 你最喜歡和最不喜歡哥大的什麼？",
+        "(5) 我們平均每月需要支付多少錢？"
+      ]
+    }
+  };
+
   const currentContent = content[locale as keyof typeof content] || content.en;
   const currentAdmissionPediaContent = admissionPediaContent[locale as keyof typeof admissionPediaContent] || admissionPediaContent.en;
   const currentAdmissionPediaContent2025 = admissionPediaContent2025[locale as keyof typeof admissionPediaContent2025] || admissionPediaContent2025.en;
+  const currentVideoContent = videoContent[locale as keyof typeof videoContent] || videoContent.en;
 
   return (
     <div>
@@ -114,6 +168,7 @@ export default function HomePage({ params: { locale } }: Props) {
       <IntroductionSection currentContent={currentContent} />
       <AdmissionPediaSection currentContent={currentAdmissionPediaContent} />
       <AdmissionPediaSection2 currentContent={currentAdmissionPediaContent2025} />
+      <VideoSection currentContent={currentVideoContent} />
     </div>
   );
 }
