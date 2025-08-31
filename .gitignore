@@ -49,4 +49,6 @@ temp/
 lulo-clean/
 zhbms/
 chiron/
-Sofia_Sans/public/videos/*.mov
+Sofia_Sans/
+public/videos/*.mov
+.vercel

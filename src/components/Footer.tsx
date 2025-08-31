@@ -1,12 +1,10 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Globe, BookOpen, ExternalLink, Linkedin, Youtube, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
-  const t = useTranslations('footer');
   const params = useParams();
   const locale = params.locale as string;
 

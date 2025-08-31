@@ -32,13 +32,6 @@ export const getResources = (): ResourcesData => {
   return resourcesData as ResourcesData;
 };
 
-export const getCityUResources = (): UniversityResources => {
-  return getResources().cityu;
-};
-
-export const getColumbiaResources = (): UniversityResources => {
-  return getResources().columbia;
-};
 
 export const getResourceById = (id: string): Resource | null => {
   const resources = getResources();
