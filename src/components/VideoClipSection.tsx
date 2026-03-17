@@ -166,14 +166,14 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
       {/* Centered header */}
       <div style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m), paddingBottom: rvw(48, 80, m) }}>
         <h2
-          className="text-white font-bold"
-          style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m), marginBottom: rvw(12, 16, m) }}
+          className="text-center md:text-left text-white font-bold"
+          style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m), marginBottom: rvw(48, 16, m) }}
         >
           {currentContent.title}
         </h2>
         <p
-          className="text-white"
-          style={{ fontFamily: currentContent.subtitleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(32, 48, m) }}
+          className="text-white text-center md:text-left"
+          style={{ fontFamily: currentContent.subtitleFont, fontSize: rvw(12, 18, m), marginBottom: rvw(32, 48, m) }}
         >
           {currentContent.subtitle}
         </p>

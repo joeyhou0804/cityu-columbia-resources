@@ -52,7 +52,7 @@ export default function IntroductionSection({ currentContent }: IntroductionSect
         <div className="flex flex-col justify-center" style={{ paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m), paddingBottom: rvw(48, 80, m), gap: rvw(16, 24, m) }}>
           <h2
             ref={titleRef}
-            className="text-black font-bold"
+            className="text-center md:text-left text-black font-bold"
             style={{
               fontFamily: currentContent.titleFont,
               fontSize: rvw(32, 60, m),
@@ -63,22 +63,22 @@ export default function IntroductionSection({ currentContent }: IntroductionSect
 
           <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
             <p
-              className="text-gray-700 leading-relaxed"
-              style={{ fontFamily: currentContent.welcomeFont, fontSize: rvw(14, 18, m) }}
+              className="text-gray-700 leading-relaxed text-center md:text-left"
+              style={{ fontFamily: currentContent.welcomeFont, fontSize: rvw(12, 18, m) }}
             >
               {currentContent.welcome}
             </p>
 
             <p
               className="text-gray-700 leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
 
             <p
               className="text-gray-700 leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
             >
               {currentContent.paragraph2}
             </p>

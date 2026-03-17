@@ -217,7 +217,7 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
               {/* Left column - Text content */}
               <div className="md:col-span-2 flex flex-col justify-center" style={{ gap: rvw(16, 24, m) }}>
                 <h2
-                  className="text-white font-bold"
+                  className="text-center md:text-left text-white font-bold"
                   style={{
                     fontFamily: currentContent.titleFont,
                     fontSize: rvw(32, 60, m),
@@ -228,16 +228,16 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
 
                 <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
                   {/* Row: section text + download buttons aligned right */}
-                  <div className="flex items-start" style={{ gap: rvw(12, 16, m) }}>
+                  <div className="flex flex-col md:flex-row md:items-start" style={{ gap: rvw(12, 16, m) }}>
                     <p
-                      className="text-white leading-relaxed flex-1 min-w-0"
-                      style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m) }}
+                      className="text-white leading-relaxed text-center md:text-left md:flex-1 md:min-w-0"
+                      style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m) }}
                     >
                       {currentContent.section}
                     </p>
 
-                    {/* Button group (right-aligned) */}
-                    <div className="shrink-0 flex items-center" style={{ gap: rvw(6, 8, m), marginLeft: rvw(6, 8, m) }}>
+                    {/* Button group (centered on mobile, right-aligned on desktop) */}
+                    <div className="flex items-center justify-center md:justify-start md:shrink-0" style={{ gap: rvw(6, 8, m) }}>
                       {/* CityU button (#BB3568) */}
                       {cityu.show && (
                         <DualTooltip
@@ -274,14 +274,14 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
 
                   <p
                     className="text-white leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
                   >
                     {currentContent.paragraph1}
                   </p>
 
                   <p
                     className="text-white leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
                   >
                     {currentContent.paragraph2}
                   </p>

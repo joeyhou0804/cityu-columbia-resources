@@ -120,15 +120,15 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           {/* Row 1: page title/paragraph + video 1 title/subtitle */}
           <div className="md:col-span-2 flex flex-col" style={{ gap: rvw(16, 24, m) }}>
             <h2
-              className="text-white font-bold"
-              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m) }}
+              className="text-center md:text-left text-white font-bold"
+              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m), marginBottom: rvw(32, 0, m) }}
             >
               {currentContent.title}
             </h2>
 
             <p
               className="text-white leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
@@ -137,14 +137,14 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
             <div>
               <h3
                 ref={videoTitleRef1}
-                className="text-white font-semibold"
-                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(16, 20, m), marginTop: rvw(28, 48, m) }}
+                className="text-white font-semibold text-center md:text-left"
+                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 20, m), marginTop: rvw(28, 48, m) }}
               >
                 {currentContent.videoTitle}
               </h3>
               <p
-                className="text-gray-400 leading-relaxed"
-                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
+                className="text-gray-400 leading-relaxed text-center md:text-left"
+                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m), marginTop: rvw(4, 4, m) }}
               >
                 {currentContent.videoSubtitle}
               </p>
@@ -158,7 +158,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 <p
                   key={i}
                   className="text-white leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
                 >
                   {q}
                 </p>
@@ -176,7 +176,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 : 'motion-safe:opacity-0 motion-safe:translate-x-8 md:motion-safe:translate-x-full',
             ].join(' ')}
           >
-            <div className="w-full" style={{ maxWidth: rvw(280, 448, m) }}>
+            <div className="w-full mx-auto md:mx-0" style={{ maxWidth: rvw(280, 448, m) }}>
               <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
                 {(() => {
                   const config = getVideoConfig(1);
@@ -213,14 +213,14 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           <div className="md:col-span-2 md:row-start-3">
             <h3
               ref={videoTitleRef2}
-              className="text-white font-semibold"
-              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(16, 20, m), marginTop: rvw(28, 48, m) }}
+              className="text-white font-semibold text-center md:text-left"
+              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 20, m), marginTop: rvw(28, 48, m) }}
             >
               {currentContent.videoTitle2}
             </h3>
             <p
-              className="text-gray-400 leading-relaxed"
-              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
+              className="text-gray-400 leading-relaxed text-center md:text-left"
+              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m), marginTop: rvw(4, 4, m) }}
             >
               {currentContent.videoSubtitle2}
             </p>
@@ -233,7 +233,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 <p
                   key={i}
                   className="text-white leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
                 >
                   {q}
                 </p>
@@ -251,7 +251,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 : 'motion-safe:opacity-0 motion-safe:translate-x-8 md:motion-safe:translate-x-full',
             ].join(' ')}
           >
-            <div className="w-full" style={{ maxWidth: rvw(280, 448, m) }}>
+            <div className="w-full mx-auto md:mx-0" style={{ maxWidth: rvw(280, 448, m) }}>
               <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
                 {(() => {
                   const config = getVideoConfig(2);

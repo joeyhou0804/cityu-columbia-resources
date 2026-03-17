@@ -51,12 +51,12 @@ export default function Footer() {
           {/* Links & Contact - takes 3/4 width */}
           <div className="col-span-1 md:col-span-3">
             <h3
-              className="font-semibold"
+              className="font-semibold text-center md:text-left"
               style={{ fontFamily: currentContent.titleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(12, 16, m) }}
             >
               {currentContent.linksContactTitle}
             </h3>
-            <div className="flex flex-col" style={{ gap: rvw(10, 12, m) }}>
+            <div className="flex flex-col items-center md:items-start" style={{ gap: rvw(10, 12, m) }}>
               <div>
                 <a
                   href="https://cityu-hk.gs.columbia.edu/"
@@ -81,7 +81,7 @@ export default function Footer() {
 
           {/* Languages (no title) - takes 1/4 width */}
           <div className="col-span-1">
-            <ul className="flex flex-col" style={{ gap: rvw(6, 8, m), marginTop: rvw(20, 24, m) }}>
+            <ul className="flex flex-col items-center md:items-start" style={{ gap: rvw(6, 8, m), marginTop: rvw(20, 24, m) }}>
               <li>
                 <Link href="/en" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center" style={{ fontSize: rvw(13, 16, m) }}>
                   <Globe style={{ width: rvw(12, 16, m), height: rvw(12, 16, m), marginRight: rvw(6, 8, m) }} />
@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Second Row: Disclaimer - full width */}
         <div className="border-t border-gray-800" style={{ paddingTop: rvw(24, 32, m) }}>
           <h3
-            className="font-semibold"
+            className="font-semibold text-center md:text-left"
             style={{ fontFamily: currentContent.titleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(12, 16, m) }}
           >
             {currentContent.disclaimerTitle}
