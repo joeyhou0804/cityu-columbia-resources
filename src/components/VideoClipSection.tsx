@@ -173,7 +173,7 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
         </h2>
         <p
           className="text-white text-center md:text-left"
-          style={{ fontFamily: currentContent.subtitleFont, fontSize: rvw(12, 18, m), marginBottom: rvw(32, 48, m) }}
+          style={{ fontFamily: currentContent.subtitleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(32, 48, m) }}
         >
           {currentContent.subtitle}
         </p>

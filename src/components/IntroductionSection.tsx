@@ -64,21 +64,21 @@ export default function IntroductionSection({ currentContent }: IntroductionSect
           <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
             <p
               className="text-gray-700 leading-relaxed text-center md:text-left"
-              style={{ fontFamily: currentContent.welcomeFont, fontSize: rvw(12, 18, m) }}
+              style={{ fontFamily: currentContent.welcomeFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.welcome}
             </p>
 
             <p
               className="text-gray-700 leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
 
             <p
               className="text-gray-700 leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph2}
             </p>

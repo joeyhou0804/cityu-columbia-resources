@@ -128,7 +128,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
 
             <p
               className="text-white leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
@@ -144,7 +144,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
               </h3>
               <p
                 className="text-gray-400 leading-relaxed text-center md:text-left"
-                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m), marginTop: rvw(4, 4, m) }}
+                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
               >
                 {currentContent.videoSubtitle}
               </p>
@@ -158,7 +158,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 <p
                   key={i}
                   className="text-white leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                 >
                   {q}
                 </p>
@@ -220,7 +220,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
             </h3>
             <p
               className="text-gray-400 leading-relaxed text-center md:text-left"
-              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m), marginTop: rvw(4, 4, m) }}
+              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
             >
               {currentContent.videoSubtitle2}
             </p>
@@ -233,7 +233,7 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
                 <p
                   key={i}
                   className="text-white leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                 >
                   {q}
                 </p>
