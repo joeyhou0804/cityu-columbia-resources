@@ -117,6 +117,7 @@ const BUTTONS_BY_LOCALE: Record<
 
 export default function AdmissionPediaSection({ currentContent }: AdmissionPediaSectionProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(1512);
   const sectionRef = useRef<HTMLDivElement>(null);
   const params = useParams();
   const rawLocale = (params.locale as string) || 'en';
@@ -126,14 +127,14 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
 
   const { cityu, columbia } = BUTTONS_BY_LOCALE[locale];
 
-  // ---- Configurable constants for the image scroller ----
+  // ---- Image scroller spacing (px-based, proportional to viewport width) ----
+  // 37vw keeps a consistent gap above portrait-ratio image heights across all desktop widths.
   const imageCount = 7;
-  const IMAGE_SPACING_VH = 65;   // vertical spacing between images
-  const LAST_IMAGE_STOP_VH = 10; // last image should stop 10vh above bottom
+  const IMAGE_SPACING_PX = windowWidth * 0.37;
+  const LAST_IMAGE_STOP_PX = windowWidth * 0.04;
 
-  // Move exactly enough so the last image reaches 10vh when progress === 1
   const lastIndex = imageCount - 1;
-  const scrollDistance = LAST_IMAGE_STOP_VH + lastIndex * IMAGE_SPACING_VH;
+  const scrollDistance = LAST_IMAGE_STOP_PX + lastIndex * IMAGE_SPACING_PX;
 
   // Get appropriate image prefix based on locale
   const getImagePrefix = () => {
@@ -173,12 +174,18 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
       }
     };
 
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      handleScroll();
+    };
+
+    setWindowWidth(window.innerWidth);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -186,7 +193,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
     <section
       ref={sectionRef}
       className="relative z-20"
-      style={{ height: `${scrollDistance}vh` }}
+      style={{ height: `${scrollDistance}px` }}
     >
       {/* Fixed Video Background */}
       <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
@@ -281,15 +288,15 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
               <div className="col-span-1 relative h-full overflow-hidden">
                 {Array.from({ length: imageCount }, (_, i) => i + 1).map((num, index) => {
                   const currentBottom =
-                    -index * IMAGE_SPACING_VH + scrollProgress * scrollDistance;
-                  const isVisible = currentBottom > -80 && currentBottom < 120;
+                    -index * IMAGE_SPACING_PX + scrollProgress * scrollDistance;
+                  const isVisible = currentBottom > -windowWidth && currentBottom < windowWidth * 1.5;
 
                   return (
                     <div
                       key={num}
                       className="absolute w-full px-4"
                       style={{
-                        bottom: `${currentBottom}vh`,
+                        bottom: `${currentBottom}px`,
                         opacity: isVisible ? 1 : 0,
                         transition: 'opacity 0.2s ease-out',
                       }}
