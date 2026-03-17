@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { vw, rvw } from '@/utils/scaling';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import VideoWithFallback from './VideoWithFallback';
 
 interface AdmissionPediaSectionProps {
   currentContent: {
@@ -203,9 +204,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
         {/* 1. Text section — natural flow, no height constraint */}
         <div className="relative z-20">
           <div className="absolute inset-0 -z-10 overflow-hidden">
-            <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
-              <source src="/videos/background2.mp4" type="video/mp4" />
-            </video>
+            <VideoWithFallback src="/videos/background2.mp4" fallbackSrc="/images/background2.jpg" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black bg-opacity-60" />
           </div>
 
@@ -219,7 +218,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
 
             <div className="flex flex-col" style={{ gap: rvw(16, 24, true), marginTop: rvw(32, 48, true) }}>
               <div className="flex flex-col" style={{ gap: rvw(12, 16, true) }}>
-                <p className="text-white leading-relaxed text-center" style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, true) }}>
+                <p className="text-white leading-relaxed text-center" style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, true) }}>
                   {currentContent.section}
                 </p>
                 <div className="flex items-center justify-center" style={{ gap: rvw(6, 8, true) }}>
@@ -235,10 +234,10 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
                   )}
                 </div>
               </div>
-              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, true) }}>
+              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, true) }}>
                 {currentContent.paragraph1}
               </p>
-              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, true) }}>
+              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, true) }}>
                 {currentContent.paragraph2}
               </p>
             </div>
@@ -248,9 +247,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
         {/* 2. Image carousel section — sticky scroll-jacking */}
         <div ref={sectionRef} className="relative z-20" style={{ height: `${mobileCarouselHeight}px` }}>
           <div className="sticky top-0 h-screen overflow-hidden">
-            <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
-              <source src="/videos/background2.mp4" type="video/mp4" />
-            </video>
+            <VideoWithFallback src="/videos/background2.mp4" fallbackSrc="/images/background2.jpg" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black bg-opacity-60" />
 
             {/* Images slide horizontally */}
@@ -290,9 +287,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
     >
       {/* Fixed Video Background */}
       <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
-        <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
-          <source src="/videos/background2.mp4" type="video/mp4" />
-        </video>
+        <VideoWithFallback src="/videos/background2.mp4" fallbackSrc="/images/background2.jpg" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
         <div className="absolute inset-0 z-10">

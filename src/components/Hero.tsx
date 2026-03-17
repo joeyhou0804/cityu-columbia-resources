@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { rvw } from '@/utils/scaling';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import VideoWithFallback from './VideoWithFallback';
 
 export default function Hero() {
   const [showFirstRow, setShowFirstRow] = useState(false);
@@ -56,15 +57,11 @@ export default function Hero() {
     <>
       {/* Fixed Video Background */}
       <div className="fixed inset-0 w-full h-screen overflow-hidden z-0">
-        <video
+        <VideoWithFallback
+          src="/videos/background1.mp4"
+          fallbackSrc="/images/background1.jpg"
           className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/videos/background1.mp4" type="video/mp4" />
-        </video>
+        />
       </div>
 
       {/* Hero Content */}
