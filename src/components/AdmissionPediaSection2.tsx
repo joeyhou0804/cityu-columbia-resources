@@ -121,6 +121,7 @@ const BUTTONS_BY_LOCALE: Record<
 export default function AdmissionPediaSection2({ currentContent }: AdmissionPediaSection2Props) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [windowWidth, setWindowWidth] = useState(1512);
+  const [viewportHeight, setViewportHeight] = useState(812);
   const sectionRef = useRef<HTMLDivElement>(null);
   const params = useParams();
   const rawLocale = (params.locale as string) || 'en';
@@ -137,6 +138,10 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
 
   const lastIndex = imageCount - 1;
   const scrollDistance = LAST_IMAGE_STOP_PX + lastIndex * IMAGE_SPACING_PX;
+
+  // Mobile: scroll travel for the image-only sticky section
+  const mobileCarouselHeight = lastIndex * viewportHeight * 0.7 + viewportHeight;
+  const mobileImageIndexRaw = scrollProgress * lastIndex;
 
   // Get appropriate image prefix based on locale
   const getImagePrefix = () => {
@@ -162,7 +167,6 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Progress through the sticky span: 0 -> 1
       if (rect.top <= 0 && rect.bottom >= windowHeight) {
         const sectionHeight = rect.height;
         const visibleFromTop = Math.abs(rect.top);
@@ -177,10 +181,12 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
 
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
       handleScroll();
     };
 
     setWindowWidth(window.innerWidth);
+    setViewportHeight(window.innerHeight);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize);
@@ -190,122 +196,156 @@ export default function AdmissionPediaSection2({ currentContent }: AdmissionPedi
     };
   }, []);
 
+  /* ---- Mobile: text flows freely, then sticky image carousel ---- */
+  if (m) {
+    return (
+      <>
+        {/* 1. Text section — natural flow, no height constraint */}
+        <div className="relative z-20">
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
+              <source src="/videos/background3.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black bg-opacity-60" />
+          </div>
+
+          <div style={{ paddingLeft: rvw(16, 32, true), paddingRight: rvw(16, 32, true), paddingTop: rvw(48, 80, true), paddingBottom: rvw(48, 80, true) }}>
+            <h2
+              className="text-center text-white font-bold"
+              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, true) }}
+            >
+              {currentContent.title}
+            </h2>
+
+            <div className="flex flex-col" style={{ gap: rvw(16, 24, true), marginTop: rvw(32, 48, true) }}>
+              <div className="flex flex-col" style={{ gap: rvw(12, 16, true) }}>
+                <p className="text-white leading-relaxed text-center" style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, true) }}>
+                  {currentContent.section}
+                </p>
+                <div className="flex items-center justify-center" style={{ gap: rvw(6, 8, true) }}>
+                  {cityu.show && (
+                    <DualTooltip topEnabled={cityu.topTooltipEnabled} topLabel={cityu.topTooltipLabel} bottomEnabled={cityu.bottomTooltipEnabled} bottomLabel={cityu.bottomTooltipLabel}>
+                      <ActionButton cfg={cityu} colorHex="#BB3568" ariaLabel={`${cityu.label} (PDF)`} />
+                    </DualTooltip>
+                  )}
+                  {columbia.show && (
+                    <DualTooltip topEnabled={columbia.topTooltipEnabled} topLabel={columbia.topTooltipLabel} bottomEnabled={columbia.bottomTooltipEnabled} bottomLabel={columbia.bottomTooltipLabel}>
+                      <ActionButton cfg={columbia} colorHex="#62A8E5" ariaLabel={`${columbia.label} (PDF)`} />
+                    </DualTooltip>
+                  )}
+                </div>
+              </div>
+              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, true) }}>
+                {currentContent.paragraph1}
+              </p>
+              <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, true) }}>
+                {currentContent.paragraph2}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Image carousel section — sticky scroll-jacking */}
+        <div ref={sectionRef} className="relative z-20" style={{ height: `${mobileCarouselHeight}px` }}>
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
+              <source src="/videos/background3.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black bg-opacity-60" />
+
+            {/* Images slide horizontally */}
+            <div className="absolute inset-0 flex items-center overflow-hidden" style={{ paddingTop: rvw(80, 0, true) }}>
+              {Array.from({ length: imageCount }, (_, i) => i + 1).map((num, index) => {
+                const leftPercent = (index - mobileImageIndexRaw) * 100;
+                const isVisible = Math.abs(leftPercent) < 150;
+                return (
+                  <div
+                    key={num}
+                    className="absolute top-0 bottom-0 flex items-center"
+                    style={{ left: `${leftPercent}%`, width: '100%', paddingLeft: rvw(16, 32, true), paddingRight: rvw(16, 32, true) }}
+                  >
+                    {isVisible && (
+                      <img
+                        src={getImagePath(num)}
+                        alt={`AdmissionPedia 2025 resource ${num}`}
+                        className="w-full h-auto rounded-lg shadow-xl"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  /* ---- Desktop: sticky scroll-jacking layout ---- */
   return (
     <section
       ref={sectionRef}
       className="relative z-20"
       style={{ height: `${scrollDistance}px` }}
     >
-      {/* Fixed Video Background */}
       <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
+        <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
           <source src="/videos/background3.mp4" type="video/mp4" />
         </video>
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-        {/* Content overlay */}
         <div className="absolute inset-0 z-10">
-          <div className="h-full" style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m) }}>
-            <div className="grid grid-cols-1 md:grid-cols-3 h-full" style={{ gap: rvw(20, 32, m) }}>
-              {/* Left column - Text content */}
-              <div className="md:col-span-2 flex flex-col justify-center" style={{ gap: rvw(16, 24, m) }}>
+          <div className="h-full" style={{ maxWidth: vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, false), paddingRight: rvw(16, 32, false), paddingTop: rvw(20, 80, false) }}>
+            <div className="grid grid-cols-3 h-full" style={{ gap: rvw(20, 32, false) }}>
+              {/* Left column - Text */}
+              <div className="col-span-2 flex flex-col justify-center" style={{ gap: rvw(16, 24, false) }}>
                 <h2
-                  className="text-center md:text-left text-white font-bold"
-                  style={{
-                    fontFamily: currentContent.titleFont,
-                    fontSize: rvw(32, 60, m),
-                  }}
+                  className="text-white font-bold"
+                  style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, false) }}
                 >
                   {currentContent.title}
                 </h2>
 
-                <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
-                  {/* Row: section text + download buttons aligned right */}
-                  <div className="flex flex-col md:flex-row md:items-start" style={{ gap: rvw(12, 16, m) }}>
+                <div className="flex flex-col" style={{ gap: rvw(16, 24, false), marginTop: rvw(32, 48, false) }}>
+                  <div className="flex flex-row items-start" style={{ gap: rvw(12, 16, false) }}>
                     <p
-                      className="text-white leading-relaxed text-center md:text-left md:flex-1 md:min-w-0"
-                      style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, m) }}
+                      className="text-white leading-relaxed flex-1 min-w-0"
+                      style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(12, 18, false) }}
                     >
                       {currentContent.section}
                     </p>
-
-                    {/* Button group (centered on mobile, right-aligned on desktop) */}
-                    <div className="flex items-center justify-center md:justify-start md:shrink-0" style={{ gap: rvw(6, 8, m) }}>
-                      {/* CityU button (#BB3568) */}
+                    <div className="flex items-center shrink-0" style={{ gap: rvw(6, 8, false) }}>
                       {cityu.show && (
-                        <DualTooltip
-                          topEnabled={cityu.topTooltipEnabled}
-                          topLabel={cityu.topTooltipLabel}
-                          bottomEnabled={cityu.bottomTooltipEnabled}
-                          bottomLabel={cityu.bottomTooltipLabel}
-                        >
-                          <ActionButton
-                            cfg={cityu}
-                            colorHex="#BB3568"
-                            ariaLabel={`${cityu.label} (PDF)`}
-                          />
+                        <DualTooltip topEnabled={cityu.topTooltipEnabled} topLabel={cityu.topTooltipLabel} bottomEnabled={cityu.bottomTooltipEnabled} bottomLabel={cityu.bottomTooltipLabel}>
+                          <ActionButton cfg={cityu} colorHex="#BB3568" ariaLabel={`${cityu.label} (PDF)`} />
                         </DualTooltip>
                       )}
-
-                      {/* Columbia button (#62A8E5) */}
                       {columbia.show && (
-                        <DualTooltip
-                          topEnabled={columbia.topTooltipEnabled}
-                          topLabel={columbia.topTooltipLabel}
-                          bottomEnabled={columbia.bottomTooltipEnabled}
-                          bottomLabel={columbia.bottomTooltipLabel}
-                        >
-                          <ActionButton
-                            cfg={columbia}
-                            colorHex="#62A8E5"
-                            ariaLabel={`${columbia.label} (PDF)`}
-                          />
+                        <DualTooltip topEnabled={columbia.topTooltipEnabled} topLabel={columbia.topTooltipLabel} bottomEnabled={columbia.bottomTooltipEnabled} bottomLabel={columbia.bottomTooltipLabel}>
+                          <ActionButton cfg={columbia} colorHex="#62A8E5" ariaLabel={`${columbia.label} (PDF)`} />
                         </DualTooltip>
                       )}
                     </div>
                   </div>
-
-                  <p
-                    className="text-white leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
-                  >
+                  <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, false) }}>
                     {currentContent.paragraph1}
                   </p>
-
-                  <p
-                    className="text-white leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, m) }}
-                  >
+                  <p className="text-white leading-relaxed" style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(12, 18, false) }}>
                     {currentContent.paragraph2}
                   </p>
                 </div>
               </div>
 
-              {/* Right column - Images that scroll through the viewport */}
+              {/* Right column - Images scroll vertically on desktop */}
               <div className="col-span-1 relative h-full overflow-hidden">
                 {Array.from({ length: imageCount }, (_, i) => i + 1).map((num, index) => {
-                  // Start at top-of-list: image 1 visible first.
-                  const currentBottom =
-                    (-index * IMAGE_SPACING_PX) + (scrollProgress * scrollDistance);
-
+                  const currentBottom = (-index * IMAGE_SPACING_PX) + (scrollProgress * scrollDistance);
                   const isVisible = currentBottom > -windowWidth && currentBottom < windowWidth * 1.5;
-
                   return (
                     <div
                       key={num}
                       className="absolute w-full px-4"
-                      style={{
-                        bottom: `${currentBottom}px`,
-                        opacity: isVisible ? 1 : 0,
-                        transition: 'opacity 0.2s ease-out',
-                      }}
+                      style={{ bottom: `${currentBottom}px`, opacity: isVisible ? 1 : 0, transition: 'opacity 0.2s ease-out' }}
                     >
                       <img
                         src={getImagePath(num)}
