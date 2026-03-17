@@ -110,32 +110,49 @@
 
 @layer components {
   .logo-text {
-    font-size: 18px;
+    font-size: calc(100vw * 18 / 1512);
     font-weight: bold;
     line-height: 1.1;
     text-align: left;
   }
-  
+
   .logo-text-en {
     font-family: 'Sofia Sans ExtraBold', sans-serif;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: calc(100vw * 20 / 1512);
   }
-  
+
   .logo-text-zh-cn {
     font-family: 'ZhiBingMei Bold', 'Microsoft YaHei', sans-serif;
-    font-size: 16px;
-    gap: 4px;
+    font-size: calc(100vw * 16 / 1512);
+    gap: calc(100vw * 4 / 1512);
     display: flex;
     flex-direction: column;
   }
-  
+
   .logo-text-zh-hk {
     font-family: 'ChironHeiHK Heavy', 'Microsoft JhengHei', sans-serif;
-    font-size: 16px;
-    gap: 4px;
+    font-size: calc(100vw * 16 / 1512);
+    gap: calc(100vw * 4 / 1512);
     display: flex;
     flex-direction: column;
+  }
+
+  @media (max-width: 767px) {
+    .logo-text {
+      font-size: calc(100vw * 14 / 390);
+    }
+    .logo-text-en {
+      font-size: calc(100vw * 16 / 390);
+    }
+    .logo-text-zh-cn {
+      font-size: calc(100vw * 13 / 390);
+      gap: calc(100vw * 3 / 390);
+    }
+    .logo-text-zh-hk {
+      font-size: calc(100vw * 13 / 390);
+      gap: calc(100vw * 3 / 390);
+    }
   }
   
   .logo-line-1 {

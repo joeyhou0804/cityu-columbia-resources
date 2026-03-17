@@ -4,10 +4,13 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
+import { vw, rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Navigation() {
   const params = useParams();
   const [isScrolled, setIsScrolled] = useState(false);
+  const m = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,8 +48,7 @@ export default function Navigation() {
         ? 'bg-white shadow-lg' 
         : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
+      <div className="flex justify-between items-center" style={{ paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(14, 24, m), paddingBottom: rvw(14, 24, m) }}>
           {/* Logo */}
           <Link 
             href={`/${locale}`} 
@@ -65,7 +67,6 @@ export default function Navigation() {
           <div>
             <LanguageSwitcher isTransparent={!isScrolled} />
           </div>
-        </div>
       </div>
     </nav>
   );

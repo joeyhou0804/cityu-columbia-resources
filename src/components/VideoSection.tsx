@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { vw, rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface VideoSectionProps {
   currentContent: {
@@ -26,6 +28,7 @@ type VideoConfig =
 export default function VideoSection({ currentContent }: VideoSectionProps) {
   const params = useParams();
   const locale = params.locale as string;
+  const m = useIsMobile();
 
   // Get video URLs and thumbnails
   const getVideoConfig = (episode: 1 | 2): VideoConfig => {
@@ -106,26 +109,26 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
 
   return (
     <section className="relative z-20 overflow-x-hidden" style={{ backgroundColor: '#003865' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m), paddingBottom: rvw(48, 80, m) }}>
         {/* Grid (lg+):
             Row 1: page header + Video 1 header (left)
             Row 2: Questions 1 (left) + Video 1 (right)
             Row 3: Video 2 header (left)
             Row 4: Questions 2 (left) + Video 2 (right)
         */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:auto-rows-min">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:auto-rows-min" style={{ gap: rvw(20, 32, m) }}>
           {/* Row 1: page title/paragraph + video 1 title/subtitle */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="md:col-span-2 flex flex-col" style={{ gap: rvw(16, 24, m) }}>
             <h2
               className="text-white font-bold"
-              style={{ fontFamily: currentContent.titleFont, fontSize: '60px' }}
+              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m) }}
             >
               {currentContent.title}
             </h2>
 
             <p
-              className="text-white text-lg leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont }}
+              className="text-white leading-relaxed"
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
@@ -134,14 +137,14 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
             <div>
               <h3
                 ref={videoTitleRef1}
-                className="text-white text-xl font-semibold mt-10 lg:mt-12"
-                style={{ fontFamily: currentContent.sectionFont }}
+                className="text-white font-semibold"
+                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(16, 20, m), marginTop: rvw(28, 48, m) }}
               >
                 {currentContent.videoTitle}
               </h3>
               <p
-                className="text-gray-400 text-lg leading-relaxed mt-1"
-                style={{ fontFamily: currentContent.sectionFont }}
+                className="text-gray-400 leading-relaxed"
+                style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
               >
                 {currentContent.videoSubtitle}
               </p>
@@ -149,13 +152,13 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           </div>
 
           {/* Row 2 (left): Questions 1 */}
-          <div className="lg:col-span-2 lg:row-start-2">
-            <div className="space-y-2">
+          <div className="md:col-span-2 md:row-start-2">
+            <div className="flex flex-col" style={{ gap: rvw(6, 8, m) }}>
               {currentContent.questions.map((q, i) => (
                 <p
                   key={i}
-                  className="text-white text-lg leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont }}
+                  className="text-white leading-relaxed"
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                 >
                   {q}
                 </p>
@@ -166,14 +169,14 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           {/* Row 2 (right): Video 1 (slides in) */}
           <div
             className={[
-              'lg:col-start-3 lg:row-start-2 self-start',
+              'md:col-start-3 md:row-start-2 self-start',
               'motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out',
               video1Revealed
                 ? 'motion-safe:opacity-100 motion-safe:translate-x-0'
-                : 'motion-safe:opacity-0 motion-safe:translate-x-8 lg:motion-safe:translate-x-full',
+                : 'motion-safe:opacity-0 motion-safe:translate-x-8 md:motion-safe:translate-x-full',
             ].join(' ')}
           >
-            <div className="w-full max-w-md">
+            <div className="w-full" style={{ maxWidth: rvw(280, 448, m) }}>
               <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
                 {(() => {
                   const config = getVideoConfig(1);
@@ -207,30 +210,30 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           </div>
 
           {/* Row 3 (left): Video 2 header only */}
-          <div className="lg:col-span-2 lg:row-start-3">
+          <div className="md:col-span-2 md:row-start-3">
             <h3
               ref={videoTitleRef2}
-              className="text-white text-xl font-semibold mt-10 lg:mt-12"
-              style={{ fontFamily: currentContent.sectionFont }}
+              className="text-white font-semibold"
+              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(16, 20, m), marginTop: rvw(28, 48, m) }}
             >
               {currentContent.videoTitle2}
             </h3>
             <p
-              className="text-gray-400 text-lg leading-relaxed mt-1"
-              style={{ fontFamily: currentContent.sectionFont }}
+              className="text-gray-400 leading-relaxed"
+              style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m), marginTop: rvw(4, 4, m) }}
             >
               {currentContent.videoSubtitle2}
             </p>
           </div>
 
           {/* Row 4 (left): Questions 2 */}
-          <div className="lg:col-span-2 lg:row-start-4">
-            <div className="space-y-2">
+          <div className="md:col-span-2 md:row-start-4">
+            <div className="flex flex-col" style={{ gap: rvw(6, 8, m) }}>
               {currentContent.questions2.map((q, i) => (
                 <p
                   key={i}
-                  className="text-white text-lg leading-relaxed"
-                  style={{ fontFamily: currentContent.bodyFont }}
+                  className="text-white leading-relaxed"
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                 >
                   {q}
                 </p>
@@ -241,14 +244,14 @@ export default function VideoSection({ currentContent }: VideoSectionProps) {
           {/* Row 4 (right): Video 2 (slides in; top-aligns with Questions 2) */}
           <div
             className={[
-              'lg:col-start-3 lg:row-start-4 self-start',
+              'md:col-start-3 md:row-start-4 self-start',
               'motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-out',
               video2Revealed
                 ? 'motion-safe:opacity-100 motion-safe:translate-x-0'
-                : 'motion-safe:opacity-0 motion-safe:translate-x-8 lg:motion-safe:translate-x-full',
+                : 'motion-safe:opacity-0 motion-safe:translate-x-8 md:motion-safe:translate-x-full',
             ].join(' ')}
           >
-            <div className="w-full max-w-md">
+            <div className="w-full" style={{ maxWidth: rvw(280, 448, m) }}>
               <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
                 {(() => {
                   const config = getVideoConfig(2);

@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
+import { vw, rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface AdmissionPediaSectionProps {
   currentContent: {
@@ -120,6 +122,7 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
   const rawLocale = (params.locale as string) || 'en';
   const locale: LocaleKey =
     rawLocale === 'zh-cn' ? 'zh-cn' : rawLocale === 'zh-hk' ? 'zh-hk' : 'en';
+  const m = useIsMobile();
 
   const { cityu, columbia } = BUTTONS_BY_LOCALE[locale];
 
@@ -201,29 +204,29 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
 
         {/* Content overlay */}
         <div className="absolute inset-0 z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-0 h-full">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
+          <div className="h-full" style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m) }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 h-full" style={{ gap: rvw(20, 32, m) }}>
               {/* Left column - Text content */}
-              <div className="col-span-2 space-y-6 flex flex-col justify-center">
+              <div className="md:col-span-2 flex flex-col justify-center" style={{ gap: rvw(16, 24, m) }}>
                 <h2
                   className="text-white font-bold"
-                  style={{ fontFamily: currentContent.titleFont, fontSize: '60px' }}
+                  style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m) }}
                 >
                   {currentContent.title}
                 </h2>
 
-                <div className="space-y-6 mt-12">
+                <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
                   {/* Row: section text + download buttons aligned right */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start" style={{ gap: rvw(12, 16, m) }}>
                     <p
-                      className="text-white text-lg leading-relaxed flex-1 min-w-0"
-                      style={{ fontFamily: currentContent.sectionFont }}
+                      className="text-white leading-relaxed flex-1 min-w-0"
+                      style={{ fontFamily: currentContent.sectionFont, fontSize: rvw(14, 18, m) }}
                     >
                       {currentContent.section}
                     </p>
 
                     {/* Button group (right-aligned) */}
-                    <div className="shrink-0 flex items-center gap-2 ml-2">
+                    <div className="shrink-0 flex items-center" style={{ gap: rvw(6, 8, m), marginLeft: rvw(6, 8, m) }}>
                       {/* CityU button (#BB3568) */}
                       {cityu.show && (
                         <DualTooltip
@@ -259,15 +262,15 @@ export default function AdmissionPediaSection({ currentContent }: AdmissionPedia
                   </div>
 
                   <p
-                    className="text-white text-lg leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont }}
+                    className="text-white leading-relaxed"
+                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                   >
                     {currentContent.paragraph1}
                   </p>
 
                   <p
-                    className="text-white text-lg leading-relaxed"
-                    style={{ fontFamily: currentContent.bodyFont }}
+                    className="text-white leading-relaxed"
+                    style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
                   >
                     {currentContent.paragraph2}
                   </p>

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { rvw, vw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface VideoClipSectionProps {
   currentContent: {
@@ -91,6 +93,7 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
   const params = useParams();
   const locale = params.locale as string;
   const videoUrls = getVideoUrls(locale);
+  const m = useIsMobile();
 
   // Measure one full set to compute marquee duration (px / pxPerSec)
   const firstSetRef = useRef<HTMLDivElement>(null);
@@ -125,7 +128,7 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
     const alt = `Video Clip ${index + 1}`;
 
     return (
-      <div className="flex-shrink-0" style={{ width: '320px' }}>
+      <div className="flex-shrink-0" style={{ width: m ? vw(240, 'mobile') : vw(320) }}>
         <div className="relative" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
           <a
             href={cfg.url}
@@ -161,16 +164,16 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
   return (
     <section className="relative z-20" style={{ backgroundColor: '#BB3568' }}>
       {/* Centered header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m), paddingBottom: rvw(48, 80, m) }}>
         <h2
-          className="text-white font-bold mb-4"
-          style={{ fontFamily: currentContent.titleFont, fontSize: '60px' }}
+          className="text-white font-bold"
+          style={{ fontFamily: currentContent.titleFont, fontSize: rvw(32, 60, m), marginBottom: rvw(12, 16, m) }}
         >
           {currentContent.title}
         </h2>
         <p
-          className="text-white text-lg mb-12"
-          style={{ fontFamily: currentContent.subtitleFont }}
+          className="text-white"
+          style={{ fontFamily: currentContent.subtitleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(32, 48, m) }}
         >
           {currentContent.subtitle}
         </p>
@@ -178,23 +181,22 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
 
       {/* Full-bleed infinite marquee */}
       <div className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
-        <div className="overflow-hidden px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden" style={{ paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m) }}>
           <div
-            className="flex gap-6 w-max will-change-transform"
-            style={
-              reducedMotion
-                ? undefined
-                : { animation: `vclip-marquee ${durationSec}s linear infinite` }
-            }
+            className="flex w-max will-change-transform"
+            style={{
+              gap: rvw(16, 24, m),
+              ...(reducedMotion ? {} : { animation: `vclip-marquee ${durationSec}s linear infinite` }),
+            }}
           >
             {/* First set (measured) */}
-            <div ref={firstSetRef} className="flex gap-6">
+            <div ref={firstSetRef} className="flex" style={{ gap: rvw(16, 24, m) }}>
               {videoUrls.map((url, i) => (
                 <Card key={`set1-${i}`} url={url} index={i} />
               ))}
             </div>
             {/* Second set (duplicate) */}
-            <div className="flex gap-6" aria-hidden="true">
+            <div className="flex" style={{ gap: rvw(16, 24, m) }} aria-hidden="true">
               {videoUrls.map((url, i) => (
                 <Card key={`set2-${i}`} url={url} index={i} />
               ))}
@@ -203,7 +205,7 @@ export default function VideoClipSection({ currentContent }: VideoClipSectionPro
         </div>
       </div>
 
-      <div className="py-16" />
+      <div style={{ paddingTop: rvw(48, 64, m), paddingBottom: rvw(48, 64, m) }} />
 
       <style jsx global>{`
         @keyframes vclip-marquee {

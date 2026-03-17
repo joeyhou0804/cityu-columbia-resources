@@ -3,6 +3,8 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, Globe, BookOpen, ExternalLink, Linkedin, Youtube, Facebook, Instagram } from 'lucide-react';
+import { vw, rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Footer() {
   const params = useParams();
@@ -39,38 +41,39 @@ export default function Footer() {
   };
 
   const currentContent = content[locale as keyof typeof content] || content.en;
+  const m = useIsMobile();
 
   return (
     <footer className="relative z-20 bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div style={{ maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(32, 48, m), paddingBottom: rvw(32, 48, m) }}>
         {/* First Row: Links & Contact (3/4 width) + Languages (1/4 width) */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4" style={{ gap: rvw(20, 32, m), marginBottom: rvw(24, 32, m) }}>
           {/* Links & Contact - takes 3/4 width */}
           <div className="col-span-1 md:col-span-3">
-            <h3 
-              className="text-lg font-semibold mb-4"
-              style={{ fontFamily: currentContent.titleFont }}
+            <h3
+              className="font-semibold"
+              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(12, 16, m) }}
             >
               {currentContent.linksContactTitle}
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-col" style={{ gap: rvw(10, 12, m) }}>
               <div>
-                <a 
-                  href="https://cityu-hk.gs.columbia.edu/" 
-                  target="_blank" 
+                <a
+                  href="https://cityu-hk.gs.columbia.edu/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-primary-400 transition-colors flex items-center"
-                  style={{ fontFamily: currentContent.bodyFont }}
+                  style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(13, 16, m) }}
                 >
-                  <ExternalLink className="h-4 w-4 mr-2" />
+                  <ExternalLink style={{ width: rvw(12, 16, m), height: rvw(12, 16, m), marginRight: rvw(6, 8, m) }} />
                   {currentContent.officialWebsite}
                 </a>
               </div>
-              <div 
+              <div
                 className="flex items-center text-gray-300"
-                style={{ fontFamily: currentContent.bodyFont }}
+                style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(13, 16, m) }}
               >
-                <Mail className="h-5 w-5 mr-2" />
+                <Mail style={{ width: rvw(14, 20, m), height: rvw(14, 20, m), marginRight: rvw(6, 8, m) }} />
                 <span>cityucolumbiaresources@gmail.com</span>
               </div>
             </div>
@@ -78,22 +81,22 @@ export default function Footer() {
 
           {/* Languages (no title) - takes 1/4 width */}
           <div className="col-span-1">
-            <ul className="space-y-2 mt-6">
+            <ul className="flex flex-col" style={{ gap: rvw(6, 8, m), marginTop: rvw(20, 24, m) }}>
               <li>
-                <Link href="/en" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center">
-                  <Globe className="h-4 w-4 mr-2" />
+                <Link href="/en" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center" style={{ fontSize: rvw(13, 16, m) }}>
+                  <Globe style={{ width: rvw(12, 16, m), height: rvw(12, 16, m), marginRight: rvw(6, 8, m) }} />
                   English
                 </Link>
               </li>
               <li>
-                <Link href="/zh-cn" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center">
-                  <Globe className="h-4 w-4 mr-2" />
+                <Link href="/zh-cn" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center" style={{ fontSize: rvw(13, 16, m) }}>
+                  <Globe style={{ width: rvw(12, 16, m), height: rvw(12, 16, m), marginRight: rvw(6, 8, m) }} />
                   简体中文
                 </Link>
               </li>
               <li>
-                <Link href="/zh-hk" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center">
-                  <Globe className="h-4 w-4 mr-2" />
+                <Link href="/zh-hk" className="text-gray-300 hover:text-primary-400 transition-colors flex items-center" style={{ fontSize: rvw(13, 16, m) }}>
+                  <Globe style={{ width: rvw(12, 16, m), height: rvw(12, 16, m), marginRight: rvw(6, 8, m) }} />
                   繁體中文
                 </Link>
               </li>
@@ -102,32 +105,32 @@ export default function Footer() {
         </div>
 
         {/* Second Row: Disclaimer - full width */}
-        <div className="border-t border-gray-800 pt-8">
-          <h3 
-            className="text-lg font-semibold mb-4"
-            style={{ fontFamily: currentContent.titleFont }}
+        <div className="border-t border-gray-800" style={{ paddingTop: rvw(24, 32, m) }}>
+          <h3
+            className="font-semibold"
+            style={{ fontFamily: currentContent.titleFont, fontSize: rvw(14, 18, m), marginBottom: rvw(12, 16, m) }}
           >
             {currentContent.disclaimerTitle}
           </h3>
-          <p 
-            className="text-gray-300 text-sm leading-relaxed"
-            style={{ fontFamily: currentContent.bodyFont }}
+          <p
+            className="text-gray-300 leading-relaxed"
+            style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(11, 14, m) }}
           >
             {currentContent.disclaimer}
           </p>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p 
-              className="text-gray-400 text-center sm:text-left"
-              style={{ fontFamily: currentContent.titleFont }}
+        <div className="border-t border-gray-800" style={{ marginTop: rvw(24, 32, m), paddingTop: rvw(24, 32, m) }}>
+          <div className="flex flex-col md:flex-row items-center justify-between" style={{ gap: rvw(12, 16, m) }}>
+            <p
+              className="text-gray-400 text-center md:text-left"
+              style={{ fontFamily: currentContent.titleFont, fontSize: rvw(11, 14, m) }}
             >
               {currentContent.copyright}
             </p>
-            
+
             {/* Social Media Icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center" style={{ gap: rvw(12, 16, m) }}>
               <a
                 href="https://www.linkedin.com/in/joey1m/"
                 target="_blank"
@@ -135,7 +138,7 @@ export default function Footer() {
                 className="text-gray-400 hover:text-primary-400 transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin style={{ width: rvw(16, 20, m), height: rvw(16, 20, m) }} />
               </a>
               <a
                 href="https://www.youtube.com/channel/UCYglU1CCVqkBqkHBYNGDbzw"
@@ -144,7 +147,7 @@ export default function Footer() {
                 className="text-gray-400 hover:text-primary-400 transition-colors"
                 aria-label="YouTube"
               >
-                <Youtube className="h-5 w-5" />
+                <Youtube style={{ width: rvw(16, 20, m), height: rvw(16, 20, m) }} />
               </a>
               <a
                 href="https://www.facebook.com/JoeyHouKun"
@@ -153,7 +156,7 @@ export default function Footer() {
                 className="text-gray-400 hover:text-primary-400 transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="h-5 w-5" />
+                <Facebook style={{ width: rvw(16, 20, m), height: rvw(16, 20, m) }} />
               </a>
               <a
                 href="https://www.instagram.com/joeyhou0804"
@@ -162,7 +165,7 @@ export default function Footer() {
                 className="text-gray-400 hover:text-primary-400 transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram style={{ width: rvw(16, 20, m), height: rvw(16, 20, m) }} />
               </a>
             </div>
           </div>

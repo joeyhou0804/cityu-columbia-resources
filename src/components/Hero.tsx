@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Hero() {
   const [showFirstRow, setShowFirstRow] = useState(false);
   const [showSecondRow, setShowSecondRow] = useState(false);
   const params = useParams();
   const locale = params.locale as string;
+  const m = useIsMobile();
 
   // Content and font configuration for each language
   const content = {
@@ -69,13 +72,13 @@ export default function Hero() {
         <div className="absolute w-full text-center text-white" style={{ top: '5%' }}>
           <div 
             className={`text-xl font-bold transition-opacity duration-1000 ${showFirstRow ? 'opacity-100' : 'opacity-0'}`} 
-            style={{ fontSize: '20px', lineHeight: '1', fontFamily: currentContent.firstRowFont }}
+            style={{ fontSize: rvw(14, 20, m), lineHeight: '1', fontFamily: currentContent.firstRowFont }}
           >
             {currentContent.firstRow}
           </div>
           <div 
             className={`font-bold transition-opacity duration-1000 ${showSecondRow ? 'opacity-100' : 'opacity-0'}`}
-            style={{ fontSize: '120px', lineHeight: '1', fontFamily: currentContent.secondRowFont }}
+            style={{ fontSize: rvw(60, 120, m), lineHeight: '1', fontFamily: currentContent.secondRowFont }}
           >
             {currentContent.secondRow}
           </div>

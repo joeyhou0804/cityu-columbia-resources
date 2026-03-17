@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { vw, rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface IntroductionSectionProps {
   currentContent: {
@@ -17,6 +19,7 @@ interface IntroductionSectionProps {
 export default function IntroductionSection({ currentContent }: IntroductionSectionProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const m = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,39 +46,39 @@ export default function IntroductionSection({ currentContent }: IntroductionSect
   }, []);
 
   return (
-    <section className="relative bg-white min-h-screen z-20">
-      <div className="max-w-7xl mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <section className="relative bg-white z-20" style={{ minHeight: rvw(700, 900, m) }}>
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ minHeight: rvw(700, 900, m), maxWidth: m ? 'none' : vw(1280), marginLeft: 'auto', marginRight: 'auto', gap: rvw(20, 32, m) }}>
         {/* Left column - Text content with padding */}
-        <div className="px-4 sm:px-6 lg:px-8 py-20 space-y-6 flex flex-col justify-center">
-          <h2 
+        <div className="flex flex-col justify-center" style={{ paddingLeft: rvw(16, 32, m), paddingRight: rvw(16, 32, m), paddingTop: rvw(48, 80, m), paddingBottom: rvw(48, 80, m), gap: rvw(16, 24, m) }}>
+          <h2
             ref={titleRef}
             className="text-black font-bold"
-            style={{ 
+            style={{
               fontFamily: currentContent.titleFont,
-              fontSize: '60px'
+              fontSize: rvw(32, 60, m),
             }}
           >
             {currentContent.title}
           </h2>
-          
-          <div className="space-y-6 mt-12">
-            <p 
-              className="text-gray-700 text-lg leading-relaxed"
-              style={{ fontFamily: currentContent.welcomeFont }}
+
+          <div className="flex flex-col" style={{ gap: rvw(16, 24, m), marginTop: rvw(32, 48, m) }}>
+            <p
+              className="text-gray-700 leading-relaxed"
+              style={{ fontFamily: currentContent.welcomeFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.welcome}
             </p>
 
-            <p 
-              className="text-gray-700 text-lg leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont }}
+            <p
+              className="text-gray-700 leading-relaxed"
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph1}
             </p>
-            
-            <p 
-              className="text-gray-700 text-lg leading-relaxed"
-              style={{ fontFamily: currentContent.bodyFont }}
+
+            <p
+              className="text-gray-700 leading-relaxed"
+              style={{ fontFamily: currentContent.bodyFont, fontSize: rvw(14, 18, m) }}
             >
               {currentContent.paragraph2}
             </p>
@@ -83,7 +86,7 @@ export default function IntroductionSection({ currentContent }: IntroductionSect
         </div>
         
         {/* Right column - Image spanning full height with top-to-bottom reveal effect */}
-        <div className="min-h-screen overflow-hidden relative">
+        <div className="overflow-hidden relative" style={{ minHeight: rvw(700, 900, m) }}>
           <div 
             className={`absolute inset-0 bg-white transition-transform duration-1000 z-10 ${
               imageLoaded ? 'transform translate-y-full' : 'transform translate-y-0'

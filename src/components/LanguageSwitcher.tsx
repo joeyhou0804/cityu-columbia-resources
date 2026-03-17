@@ -4,6 +4,8 @@ import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Globe } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import { rvw } from '@/utils/scaling';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -23,6 +25,7 @@ export default function LanguageSwitcher({ isTransparent = false }: LanguageSwit
 
   const currentLocale = params.locale as string;
   const currentLanguage = languages.find(lang => lang.code === currentLocale);
+  const m = useIsMobile();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -45,27 +48,29 @@ export default function LanguageSwitcher({ isTransparent = false }: LanguageSwit
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors ${
-          isTransparent 
-            ? 'text-white hover:text-gray-200' 
+        className={`flex items-center font-medium transition-colors ${
+          isTransparent
+            ? 'text-white hover:text-gray-200'
             : 'text-gray-700 hover:text-primary-600'
         }`}
+        style={{ gap: rvw(4, 4, m), paddingLeft: rvw(10, 12, m), paddingRight: rvw(10, 12, m), paddingTop: rvw(6, 8, m), paddingBottom: rvw(6, 8, m), fontSize: rvw(12, 14, m) }}
       >
-        <Globe size={16} />
+        <Globe style={{ width: rvw(12, 16, m), height: rvw(12, 16, m) }} />
         <span>{currentLanguage?.name}</span>
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+        <div className="absolute right-0 bg-white rounded-md shadow-lg border border-gray-200 z-50" style={{ marginTop: rvw(6, 8, m), paddingTop: rvw(6, 8, m), paddingBottom: rvw(6, 8, m), width: rvw(140, 192, m) }}>
           {languages.map((language) => (
             <Link
               key={language.code}
               href={getLocalizedPath(language.code)}
-              className={`block px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+              className={`block hover:bg-gray-100 transition-colors ${
                 language.code === currentLocale
                   ? 'text-primary-600 bg-primary-50'
                   : 'text-gray-700'
               }`}
+              style={{ paddingLeft: rvw(12, 16, m), paddingRight: rvw(12, 16, m), paddingTop: rvw(6, 8, m), paddingBottom: rvw(6, 8, m), fontSize: rvw(12, 14, m) }}
               onClick={() => setIsOpen(false)}
             >
               {language.name}
